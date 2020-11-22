@@ -28,8 +28,16 @@ module.exports = {
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
       },
     },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
+    {
+      resolve: `gatsby-source-cosmicjs`,
+      options: {
+        bucketSlug: 'shohoneycom',
+        objectTypes: ['landing-pages'],
+        apiAccess: {
+          read_key: '6v9fpSVeZnK8hEy21d5H2VtpOj0wxo5dOyBeJdp7IzIbsW9Wed'
+        },
+        localMedia: true,
+      }
+    },
   ],
 }
