@@ -16,11 +16,14 @@ const css = `
 `
 export const HeroSlider: React.FC<HeroProps> = ({srcs}) => {
     const [active, setActive] = useState(0);
-    useEffect(() => {
-        setInterval(_ => {
+    useEffect((): any => {
+        const interval = setInterval(_ => {
             setActive(active < srcs.length - 1 ? active + 1 : 0);
-        }, 5000)
-    });
+        }, 5000);
+        return _ => { 
+            clearInterval(interval) 
+        };
+    }, [active]);
     return <>
         <style>{css}</style>
         {srcs.map((s,i)=> (
