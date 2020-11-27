@@ -1,6 +1,7 @@
 :root {
   --mdc-typography-font-family: "Josefin Sans";
-  --mdc-theme-primary: lightgreen;
+  --mdc-theme-primary: white;
+  --mdc-theme-on-primary: #000000;
 }
 img {
   max-width: 100%;

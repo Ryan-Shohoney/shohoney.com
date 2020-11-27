@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {CarouselProvider, Slide, Slider, Image, ButtonBack, ButtonNext,} from 'pure-react-carousel';
+
 interface HeroProps {
     srcs: string[]
 };

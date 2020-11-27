@@ -1,4 +1,4 @@
-import React from "react"
+import React from 'react';
 import { 
   TopAppBar, 
   TopAppBarRow, 
@@ -12,21 +12,29 @@ import '@rmwc/top-app-bar/styles';
 
 interface HeaderProps {
   siteTitle: string;
+  timeString: string;
 }
 
-const Header: React.FC<HeaderProps> = (props) => (
-  <Elevation z={4}>
-    <TopAppBar>
-      <TopAppBarRow>
-        <TopAppBarSection>
-          <TopAppBarTitle>
-            {props.siteTitle || 'Title'}
-          </TopAppBarTitle>
-        </TopAppBarSection>
-      </TopAppBarRow>
-    </TopAppBar>
-    <TopAppBarFixedAdjust/>
-  </Elevation>
-)
+const Header: React.FC<HeaderProps> = (props) => {
+  return (  
+    <Elevation z={4}>
+      <TopAppBar>
+        <TopAppBarRow>
+          <TopAppBarSection>
+            <TopAppBarTitle>
+              {props.siteTitle || 'Title'}
+            </TopAppBarTitle>
+          </TopAppBarSection>
+          <TopAppBarSection alignEnd={true}>
+            <TopAppBarTitle>
+              {props.timeString}
+            </TopAppBarTitle>
+          </TopAppBarSection>
+        </TopAppBarRow>
+      </TopAppBar>
+      <TopAppBarFixedAdjust/>
+    </Elevation>
+  );
+}
 
 export default Header

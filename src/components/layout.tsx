@@ -3,8 +3,10 @@ import { useStaticQuery, graphql } from "gatsby"
 import '@rmwc/grid/styles';
 import Header from "./header"
 import "./layout.css"
-
-const Layout : React.FC = ({ children })  => {
+interface LayoutProps {
+  timeString: string;
+}
+const Layout : React.FC<LayoutProps> = (props)  => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -17,7 +19,9 @@ const Layout : React.FC = ({ children })  => {
 
   return (
     <>
-      <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
+      <Header 
+        siteTitle={data.site.siteMetadata?.title || `Title`} 
+        timeString={props.timeString}/>
       <div
         style={{
           margin: `0 auto`,
@@ -25,7 +29,7 @@ const Layout : React.FC = ({ children })  => {
         }}
       >
         <main>
-          {children}
+          {props.children}
         </main>
         <footer style={{
           marginTop: `2rem`
