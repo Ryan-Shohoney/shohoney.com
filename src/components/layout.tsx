@@ -3,6 +3,9 @@ import { useStaticQuery, graphql } from "gatsby"
 import '@rmwc/grid/styles';
 import Header from "./header"
 import "./layout.css"
+import { Typography } from '@rmwc/typography';
+import '@rmwc/typography/styles';
+
 interface LayoutProps {
   timeString?: string;
 }
@@ -34,7 +37,13 @@ const Layout : React.FC<LayoutProps> = (props)  => {
         <footer style={{
           marginTop: `2rem`
         }}>
-          © {new Date().getFullYear()}
+          <Typography use="body2">
+            Questions? &nbsp; 
+            <a href="mailto:shohoneywedding@gmail.com" target="_blank">
+              Email us.
+            </a>
+          </Typography>
+          <br/>
         </footer>
       </div>
     </>
