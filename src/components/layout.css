@@ -2,6 +2,13 @@
   --mdc-typography-font-family: "Josefin Sans";
   --mdc-theme-primary: white;
   --mdc-theme-on-primary: #000000;
+  --mdc-theme-on-secondary: #ffffff;
+}
+.caligraphy {
+  --mdc-typography-font-family: "Italianno";
+}
+span.mdc-button__label {
+  margin-top: 0.4rem;
 }
 img {
   max-width: 100%;

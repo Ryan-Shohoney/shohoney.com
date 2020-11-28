@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `Ryan and Amanda Shohoney`,
+    title: `Ryan & Amanda`,
     description: `Ryan and Amanda's Wedding website, welcome!`,
     author: `Ryan Shohoney`,
     siteUrl: 'https://shohoney.com'
@@ -32,7 +32,7 @@ module.exports = {
       resolve: `gatsby-source-cosmicjs`,
       options: {
         bucketSlug: 'shohoneycom',
-        objectTypes: ['landing-pages'],
+        objectTypes: ['landing-pages', 'content-pages'],
         apiAccess: {
           read_key: '6v9fpSVeZnK8hEy21d5H2VtpOj0wxo5dOyBeJdp7IzIbsW9Wed'
         },

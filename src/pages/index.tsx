@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { Typography } from '@rmwc/typography';
 import '@rmwc/typography/styles';
-import { Grid, GridRow, GridCell } from '@rmwc/grid';
+import { Grid, GridCell } from '@rmwc/grid';
 import '@rmwc/grid/styles';
 import { HeroSlider } from '../components/hero-slider';
 import Layout from "../components/layout"
@@ -10,10 +10,13 @@ import { heroImageService } from '../services/hero-image-service';
 import { EVENT_DATE } from "../util/constants";
 import { timeUntil } from '../services/timer';
 import { PageProps } from "gatsby";
-import { timer } from "../effects/interval-effect";
+import { SaveTheDate } from '../components/save-the-date';
+import { ButtonLink } from "../components/button-link";
 
 const PAGE_NAME = 'home-page';
-
+const cheaterMargin = {
+  margin: '0.25rem'
+}
 const IndexPage: React.FC<PageProps> = (props) => {
   const [timeString, setTimeString] = useState(timeUntil(EVENT_DATE)); 
   
@@ -24,36 +27,36 @@ const IndexPage: React.FC<PageProps> = (props) => {
     return _ => clearInterval(interval);
   }, [timeString]);
   const heroImages = heroImageService(PAGE_NAME)[0];
-  const textCenter = {
-    textAlign: 'center' as const
-  }
   
-  return <Layout timeString={timeString}>
-    <SEO title="Home" />
-    <HeroSlider srcs={heroImages.images} />
-    <Grid>
-      <GridCell span={12} >
-        <GridRow >
-          <GridCell align="middle" span={12} style={textCenter}>
-            <Typography use="headline1">The Countdown has Begun!</Typography>
-            <br/>
-            <Typography use="headline2">
-              {timeString}
-            </Typography>
-          </GridCell>
-        </GridRow>
-      </GridCell>
-      <GridCell span={12} tablet={8} >
-        <Typography use="headline3" >
-          Thanks for stopping by!
-        </Typography>
-        <br/>
-        <Typography use="body1" >
-          We are carefully planning a weekend of outdoor wedding celebrations in the Madison area.  Mark your calendar, and we hope to celebrate with you in July!
-        </Typography>
-      </GridCell>
-    </Grid>
-  </Layout>
+  return (
+    <Layout timeString={timeString}>
+      <SEO title="Home" />
+      <HeroSlider srcs={heroImages.images} />
+      <Grid>
+        <GridCell span={12}>
+          <Typography use="headline4" >
+            Thanks for stopping by!
+          </Typography>
+          <br/>
+          <Typography use="body1" tag="p">
+            We are carefully planning a weekend of outdoor wedding celebrations in the Madison area.  Mark your calendar, and we hope to celebrate with you in July!
+          </Typography>
+          <Typography use="body1" tag="p">
+            We'll be updating this site frequently, so please continue to check in!
+          </Typography>
+          <SaveTheDate style={cheaterMargin} />
+          <ButtonLink 
+            style={cheaterMargin}
+            buttonHref="/whats-new"
+            buttonText="What's new with us?"
+            outline
+            raised
+            
+          />
+        </GridCell>
+      </Grid>
+    </Layout>
+  );
 }
 
 export default IndexPage

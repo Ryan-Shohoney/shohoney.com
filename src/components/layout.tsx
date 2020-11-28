@@ -4,7 +4,7 @@ import '@rmwc/grid/styles';
 import Header from "./header"
 import "./layout.css"
 interface LayoutProps {
-  timeString: string;
+  timeString?: string;
 }
 const Layout : React.FC<LayoutProps> = (props)  => {
   const data = useStaticQuery(graphql`

@@ -7,6 +7,8 @@
 // You can delete this file if you're not using it
 import React from 'react';
 import 'fontsource-josefin-sans';
+import 'fontsource-italianno';
+import 'fontsource-material-icons';
 import 'normalize.css'
 import { RMWCProvider } from '@rmwc/provider';
 import { Theme } from '@rmwc/theme';

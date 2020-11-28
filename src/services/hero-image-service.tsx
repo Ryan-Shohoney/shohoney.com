@@ -28,7 +28,6 @@ export const heroImageService = (forPage = ''): HeroImageQL => {
   if (forPage) {
     results = [results.find(e => e.node.slug === forPage)];
   }
-  console.warn(results);
   return results.map(r => ({
     page: r.node.slug,
     images: r.node.metadata.hero_images.map(h => h.hero_image.imgix_url),
