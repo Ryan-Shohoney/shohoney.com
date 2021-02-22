@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "shohoney.com",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "description": "Website currently being used for the wedding of Ryan Shohoney and Amanda Belanger",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Ryan Shohoney <ryan.shohoney@gmail.com>",
   "dependencies": {
     "@rmwc/button": "^6.1.4",
     "@rmwc/card": "^6.1.4",
@@ -11,8 +11,10 @@
     "@rmwc/grid": "^6.1.4",
     "@rmwc/icon": "^6.1.4",
     "@rmwc/icon-button": "^6.1.4",
+    "@rmwc/list": "^6.1.4",
     "@rmwc/provider": "^6.1.4",
     "@rmwc/theme": "^6.1.4",
+    "@rmwc/tooltip": "^6.1.4",
     "@rmwc/top-app-bar": "^6.1.4",
     "@rmwc/typography": "^6.1.4",
     "fontsource-italianno": "^3.0.9",
@@ -39,10 +41,8 @@
   "devDependencies": {
     "prettier": "2.1.2"
   },
-  "keywords": [
-    "gatsby"
-  ],
-  "license": "0BSD",
+  "keywords": [],
+  "license": "MIT",
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
@@ -54,9 +54,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
+    "url": "https://github.com/Ryan-Shohoney/shohoney.com"
   },
   "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
+    "url": "https://github.com/Ryan-Shohoney/shohoney.com/issues"
   }
 }

@@ -14,7 +14,7 @@ import { SaveTheDate } from '../components/save-the-date';
 import { ButtonLink } from "../components/button-link";
 
 const PAGE_NAME = 'home-page';
-const cheaterMargin = {
+export const cheaterMargin = {
   margin: '0.25rem'
 }
 const IndexPage: React.FC<PageProps> = (props) => {
@@ -44,14 +44,20 @@ const IndexPage: React.FC<PageProps> = (props) => {
           <Typography use="body1" tag="p">
             We'll be updating this site frequently, so please continue to check in!
           </Typography>
-          <SaveTheDate style={cheaterMargin} />
+          <ButtonLink 
+            style={cheaterMargin}
+            buttonHref='/schedule-of-events'
+            buttonText='Schedule of Events'
+            outline
+            raised 
+            switchToSecondary 
+            switchToSecondaryBg />   
           <ButtonLink 
             style={cheaterMargin}
             buttonHref="/whats-new"
             buttonText="What's new with us?"
             outline
             raised
-            
           />
         </GridCell>
       </Grid>

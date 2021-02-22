@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'gatsby';
 import { 
   TopAppBar, 
   TopAppBarRow, 
@@ -28,9 +29,14 @@ const Header: React.FC<HeaderProps> = (props) => {
         <TopAppBarRow>
           <TopAppBarSection>
             <TopAppBarTitle >
-              <Typography use="headline4" tag="h1" className="caligraphy">
-                {props.siteTitle || 'Title'}
-              </Typography>
+              <Link to='/' style={{
+                color: 'inherit',
+                textDecoration:'none',
+              }}>
+                <Typography use="headline4" tag="h1" className="caligraphy">
+                  {props.siteTitle || 'Title'}
+                </Typography>
+              </Link>
             </TopAppBarTitle>
           </TopAppBarSection>
           <TopAppBarSection alignEnd>
