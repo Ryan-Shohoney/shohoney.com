@@ -8,11 +8,10 @@ import { Card, CardActionButtons, CardActionIcon } from '@rmwc/card';
 import { CollapsibleList, ListDivider, SimpleListItem } from '@rmwc/list';
 import { SaveTheDate } from '../components/save-the-date';
 import { cheaterMargin } from '.';
-import { Tooltip } from '@rmwc/tooltip';
+import { ButtonLink } from '../components/button-link';
 import '@rmwc/tooltip/styles';
 import '@rmwc/card/styles';
 import '@rmwc/list/styles';
-import { ButtonLink } from '../components/button-link';
 
 interface IEventItem {
     name: string;
@@ -36,7 +35,7 @@ const eventSchedule: IEventSchedule[] = [
         date: 'Friday, July 16, 2021',
         events: [{
             name: 'Welcome Party',
-            time: 'Friday, July 16, 2021',
+            time: 'TBD Evening',
             location: {
                 name: 'Lake Edge Park',
                 city: 'Madison',
@@ -52,7 +51,7 @@ const eventSchedule: IEventSchedule[] = [
         date: 'Saturday, July 17, 2021',
         events: [{
             name: 'Wedding Ceremony',
-            time: 'Saturday, July 17, 2021 2:30 PM',
+            time: '2:30 PM',
             saveTheDate: 'https://add.eventable.com/events/5fc2b5bab155ab00c1211cb2/603425c82556a31a8ea7beeb',
             location: {
                 name: 'Monona Terrace Rooftop',
@@ -64,7 +63,7 @@ const eventSchedule: IEventSchedule[] = [
         },
         {
             name: 'Reception',
-            time: 'Saturday, July 17, 2021 4:00PM-11:00PM',
+            time: '4:00PM-11:00PM',
             saveTheDate: 'https://add.eventable.com/events/5fc2b5bab155ab00c1211cb2/6034270074214e1b109a84d3/',
             location: {
                 name: 'Badger Farms',
@@ -104,8 +103,8 @@ const ScheduleOfEventsPage: React.FC<PageProps> = () => {
                             <Typography use='headline5' style={{ padding: '1rem 1rem 0 1rem' }}>{s.date}</Typography>
                             <ListDivider />
                             {s.events.map(e => (
-                                <>
-                                    <div key={e.name} style={{ padding: '1rem' }}>
+                                <React.Fragment key={e.name} >
+                                    <div style={{ padding: '1rem' }}>
                                         <Typography use='headline6'>
                                             {e.name}
                                         </Typography>
@@ -113,18 +112,32 @@ const ScheduleOfEventsPage: React.FC<PageProps> = () => {
                                         <Typography use='body1'>
                                             {`${e.location.name} ${e.location.city}, ${e.location.state}`}
                                         </Typography>
+                                        <br />
+                                        <Typography use='body2'>
+                                            {e.time}
+                                        </Typography>
                                         {e.notes.length > 0 && (
-                                            <CollapsibleList handle={<SimpleListItem text='Additonal Event Info' metaIcon='chevron_right'/>}>
-                                                {e.notes.map(e => <SimpleListItem key={e} text={e} />)}
-                                            </CollapsibleList>
+                                            <div style={{padding: '1rem'}}>
+                                                <Typography use='body1'>
+                                                    Additional Event Info
+                                                </Typography>
+                                                <br />
+                                                {e.notes.map((n, i) => (
+                                                    <>
+                                                        <Typography use='body2'>{n}</Typography>
+                                                        {i !== e.notes.length - 1 && <br />}
+                                                    </>
+                                                ))}
+                                            </div>
                                         )}
                                         <CardActionButtons>
                                             <CardActionIcon title="See on Google Maps" icon='place' href={e.location.googleLink} tag='a' target='_blank' />
-                                            <CardActionIcon title={e.saveTheDate ? "Save to your calendar" : 'Check back soon for a final date'} icon='calendar_today' tag='a' target='_blank' { ...(e.saveTheDate ? { href: e.saveTheDate } : {}) } />
+                                            {e.saveTheDate  && <CardActionIcon title='Save to your calendar' icon='calendar_today' tag='a' target='_blank' href={e.saveTheDate} />}
                                         </CardActionButtons>
+
                                     </div>
                                     <ListDivider />
-                                </>
+                                </React.Fragment>
                             ))}
                         </Card>
                     ))}
@@ -132,6 +145,7 @@ const ScheduleOfEventsPage: React.FC<PageProps> = () => {
                 <GridCell span={12}>
                     <SaveTheDate style={cheaterMargin} />
                     <ButtonLink 
+                        style={cheaterMargin}
                         buttonHref='/'
                         buttonText='Go Back'
                         raised
