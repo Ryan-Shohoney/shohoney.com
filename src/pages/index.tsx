@@ -10,7 +10,6 @@ import { heroImageService } from '../services/hero-image-service';
 import { EVENT_DATE } from "../util/constants";
 import { timeUntil } from '../services/timer';
 import { PageProps } from "gatsby";
-import { SaveTheDate } from '../components/save-the-date';
 import { ButtonLink } from "../components/button-link";
 
 const PAGE_NAME = 'home-page';
@@ -41,13 +40,10 @@ const IndexPage: React.FC<PageProps> = (props) => {
           <Typography use="body1" tag="p">
             We are carefully planning a weekend of outdoor wedding celebrations in the Madison area.  Mark your calendar, and we hope to celebrate with you in July!
           </Typography>
-          <Typography use="body1" tag="p">
-            We'll be updating this site frequently, so please continue to check in!
-          </Typography>
           <ButtonLink 
             style={cheaterMargin}
-            buttonHref='/schedule-of-events'
-            buttonText='Schedule of Events'
+            buttonHref='/faq'
+            buttonText='Read Our FAQ'
             outline
             raised 
             switchToSecondary 

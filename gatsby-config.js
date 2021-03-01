@@ -32,7 +32,7 @@ module.exports = {
       resolve: `gatsby-source-cosmicjs`,
       options: {
         bucketSlug: 'shohoneycom',
-        objectTypes: ['landing-pages', 'content-pages'],
+        objectTypes: ['landing-pages', 'content-pages', 'faqs'],
         apiAccess: {
           read_key: '6v9fpSVeZnK8hEy21d5H2VtpOj0wxo5dOyBeJdp7IzIbsW9Wed'
         },

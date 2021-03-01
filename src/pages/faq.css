@@ -1,0 +1,9 @@
+.faq-card:not(:first-of-type) {
+  margin: 1rem 0;
+}
+.faq-card:first-of-type {
+  margin: 0 0 1rem 0;
+}
+.faq-card:last-of-type {
+  margin: 1rem 0 0 0;
+}
