@@ -24,7 +24,7 @@ const FAQPage: React.FC<PageProps> = () => {
         }
       }
     `);
-  console.warn(data);
+
   return (
     <Layout>
       <SEO title="FAQs" />
