@@ -18,6 +18,7 @@ interface IEventItem {
   time: string;
   location: ILocation;
   saveTheDate?: string;
+  scheduleDetails?: string[];
   notes: string[];
 }
 interface ILocation {
@@ -35,7 +36,7 @@ const eventSchedule: IEventSchedule[] = [
     date: 'Friday, July 16, 2021',
     events: [{
       name: 'Welcome Party',
-      time: 'TBD Evening',
+      time: '5:30PM-8:00PM',
       location: {
         name: 'Lake Edge Park',
         city: 'Madison',
@@ -43,6 +44,9 @@ const eventSchedule: IEventSchedule[] = [
         googleLink: 'https://maps.app.goo.gl/TbCnXVBXjLxqvSdaA',
       },
       notes: [
+        'Open to all wedding guests.',
+        'Beer and wine will be served',
+        'Brats, burgers, and BBQ chicken quarters',
         'Please consider bringing a lawn chair for yourself, if you\'d like to sit.'
       ]
     }],
@@ -71,6 +75,11 @@ const eventSchedule: IEventSchedule[] = [
         state: 'Wisconsin',
         googleLink: 'https://www.google.com/maps/place/Badger+Farms+LLC/@43.0770101,-89.1360056,15z/data=!4m2!3m1!1s0x0:0x2a1610e4286eb316?sa=X&ved=2ahUKEwizypn0nuruAhXaG80KHbMTA_IQ_BIwDXoECBgQBQ',
       },
+      scheduleDetails: [
+        '4:00PM: Cocktail hour with butler passed appetizers',
+        '6:00PM: Dinner & champagne toast',
+        '8:00PM: Live music by the Foo Foo Dolls, a Madison 90s alternative rock cover band',
+      ],
       notes: [
         'Guests are welcome to bring lawn chairs to allow for them to feel comfortable, in regards to social distancing.'
       ]
@@ -91,11 +100,11 @@ const ScheduleOfEventsPage: React.FC<PageProps> = () => {
         <GridCell span={12}>
           <Typography use='body1'>
             All wedding activities will be held outdoors, in accordance with current COVID-19 guidelines.
-                    </Typography>
+          </Typography>
           <br />
           <Typography use='body1'>
             Information on room blocks will be shared in May.
-                    </Typography>
+          </Typography>
         </GridCell>
         <GridCell span={12}>
           {eventSchedule.map((s, i) => (
@@ -116,18 +125,33 @@ const ScheduleOfEventsPage: React.FC<PageProps> = () => {
                     <Typography use='body2'>
                       {e.time}
                     </Typography>
+                    {e.scheduleDetails?.length > 0 && (
+                      <div style={{padding: '1rem 0'}}>
+                        <Typography use='body1'>
+                          Detailed Event Schedule
+                        </Typography>
+                        <br />
+                        {e.scheduleDetails.map((d, i) => (
+                          <>
+                            <Typography use='body2' style={{paddingLeft: '1rem'}}>{d}</Typography>
+                            {i < e.scheduleDetails.length && <br/>}
+                          </>
+                        ))}
+                      </div>
+                    )}
                     {e.notes.length > 0 && (
                       <div style={{ padding: '1rem' }}>
                         <Typography use='body1'>
                           Additional Event Info
-                                                </Typography>
+                        </Typography>
                         <br />
-                        {e.notes.map((n, i) => (
-                          <>
-                            <Typography use='body2'>{n}</Typography>
-                            {i !== e.notes.length - 1 && <br />}
-                          </>
-                        ))}
+                        <ul style={{ margin: '0' }}>
+                          {e.notes.map((n) => (
+                            <li>
+                              <Typography use='body2'>{n}</Typography>
+                            </li>
+                          ))}
+                        </ul>
                       </div>
                     )}
                     <CardActionButtons>

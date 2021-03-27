@@ -50,8 +50,8 @@ const IndexPage: React.FC<PageProps> = (props) => {
             switchToSecondaryBg />   
           <ButtonLink 
             style={cheaterMargin}
-            buttonHref="/whats-new"
-            buttonText="What's new with us?"
+            buttonHref="/schedule-of-events"
+            buttonText="Schedule of Events"
             outline
             raised
           />
