@@ -1,4 +1,4 @@
-export interface ICosmicNode<T> { 
+export interface ICosmicNode<T> {
   id: string;
   metadata: T;
 }

@@ -1,0 +1,7 @@
+.admin-drawer .mdc-list > .mdc-list-item a {
+  text-decoration: none;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  color: inherit;
+}

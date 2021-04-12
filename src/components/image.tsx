@@ -1,9 +1,9 @@
-import React from "react"
-import { useStaticQuery, graphql } from "gatsby"
-import Img from "gatsby-image"
+import React from "react";
+import { useStaticQuery, graphql } from "gatsby";
+import Img from "gatsby-image";
 
 interface ImageProps {
-  src: string,
+  src: string;
 }
 
 const Image: React.FC<ImageProps> = ({ src }) => {
@@ -17,13 +17,13 @@ const Image: React.FC<ImageProps> = ({ src }) => {
         }
       }
     }
-  `)
+  `);
 
   if (!data?.placeholderImage?.childImageSharp?.fluid) {
-    return <div>Picture not found</div>
+    return <div>Picture not found</div>;
   }
 
-  return <Img fluid={data.placeholderImage.childImageSharp.fluid} />
-}
+  return <Img fluid={data.placeholderImage.childImageSharp.fluid} />;
+};
 
-export default Image
+export default Image;
