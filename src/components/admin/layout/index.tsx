@@ -46,7 +46,6 @@ export const AdminLayout: React.FC<IOwnProps> = ({ user, children }) => {
                 </Link>
               </ListItem>
             </List>
-            <div style={{ alignSelf: 'flex-end' }}>other things</div>
           </DrawerContent>
         </Drawer>
         <DrawerAppContent>

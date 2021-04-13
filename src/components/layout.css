@@ -1,8 +1,9 @@
 :root {
   --mdc-typography-font-family: "Josefin Sans";
-  --mdc-theme-primary: white;
-  --mdc-theme-on-primary: #000000;
-  --mdc-theme-on-secondary: #ffffff;
+  --mdc-theme-primary: #018786;
+  --mdc-theme-secondary: '#ffffff';
+  --mdc-theme-on-primary: #ffffff;
+  --mdc-theme-on-secondary: #000000;
 }
 .caligraphy {
   --mdc-typography-font-family: "Italianno";

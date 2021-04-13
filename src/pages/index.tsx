@@ -46,8 +46,6 @@ const IndexPage: React.FC<PageProps> = (props) => {
             buttonText="Read Our FAQ"
             outline
             raised
-            switchToSecondary
-            switchToSecondaryBg
           />
           <ButtonLink
             style={cheaterMargin}
@@ -55,6 +53,8 @@ const IndexPage: React.FC<PageProps> = (props) => {
             buttonText="Schedule of Events"
             outline
             raised
+            switchToSecondary
+            switchToSecondaryBg
           />
         </GridCell>
       </Grid>

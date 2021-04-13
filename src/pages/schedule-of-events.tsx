@@ -208,6 +208,8 @@ const ScheduleOfEventsPage: React.FC<PageProps> = () => {
             buttonText="Go Back"
             raised
             outline
+            switchToSecondary
+            switchToSecondaryBg
           />
         </GridCell>
       </Grid>

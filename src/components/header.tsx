@@ -25,7 +25,7 @@ const paddingRight1Rem = {
 const Header: React.FC<HeaderProps> = (props) => {
   return (
     <Elevation z={4}>
-      <TopAppBar>
+      <TopAppBar theme={['onSecondary', 'secondaryBg']}>
         <TopAppBarRow>
           <TopAppBarSection>
             <TopAppBarTitle>
