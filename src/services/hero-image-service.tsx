@@ -1,11 +1,11 @@
 import { graphql, useStaticQuery } from "gatsby";
 
 interface HeroImageQL {
-  page: string,
-  images: string[]
+  page: string;
+  images: string[];
 }
 
-export const heroImageService = (forPage = ''): HeroImageQL => {
+export const heroImageService = (forPage = ""): HeroImageQL => {
   const data = useStaticQuery(graphql`
     query HeroImageQuery {
       allCosmicjsLandingPages {
@@ -22,14 +22,15 @@ export const heroImageService = (forPage = ''): HeroImageQL => {
           }
         }
       }
-    }`);
-    
+    }
+  `);
+
   let results = data.allCosmicjsLandingPages.edges;
   if (forPage) {
-    results = [results.find(e => e.node.slug === forPage)];
+    results = [results.find((e) => e.node.slug === forPage)];
   }
-  return results.map(r => ({
+  return results.map((r) => ({
     page: r.node.slug,
-    images: r.node.metadata.hero_images.map(h => h.hero_image.imgix_url),
-  }))
-}
+    images: r.node.metadata.hero_images.map((h) => h.hero_image.imgix_url),
+  }));
+};
