@@ -24,9 +24,10 @@ const tokens: IAuthTokens = {
 };
 
 let user = {};
-const setSession = (cb = () => { }) => (err, authResult) => {
+const setSession = (cb = () => { }, path = '/admin') => (err, authResult) => {
   if (err) {
     navigate('/');
+    auth.logout({});
     cb();
   } else if (authResult && authResult.accessToken && authResult.idToken) {
     let expiresAt = authResult.expiresIn * 1000 + new Date().getTime();
@@ -35,7 +36,7 @@ const setSession = (cb = () => { }) => (err, authResult) => {
     tokens.expiresAt = expiresAt;
     user = authResult.idTokenPayload;
     localStorage.setItem("isLoggedIn", true.toString());
-    navigate("/admin");
+    navigate(path);
     cb();
   };
 }
@@ -52,10 +53,11 @@ export const logout = (): void => {
 export const handleAuthentication = () => isBrowser && auth.parseHash(setSession());
 export const getProfile = () => user;
 export const silentAuth = (callback) => {
+  console.warn();
   if (!isAuthenticated()) {
     return callback();
   }
-  auth.checkSession({}, setSession(callback));
+  auth.checkSession({}, setSession(callback, window.location.pathname));
 };
 
 export const SessionCheck: React.FC = () => {

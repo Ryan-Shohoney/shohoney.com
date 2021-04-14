@@ -18,3 +18,11 @@ export async function post<T>(restEndpoint: string, body: T): Promise<void> {
     body: JSON.stringify(body),
   });
 }
+
+export async function del(restEndpoint: string, body: { _id: string }): Promise<void> {
+  console.warn(body);
+  await fetch(`${process.env.SERVICE_URL}/${restEndpoint}?party=${body}`, {
+    method: 'DELETE',
+    body: JSON.stringify(body),
+  });
+}

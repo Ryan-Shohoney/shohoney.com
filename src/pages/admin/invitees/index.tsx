@@ -7,13 +7,17 @@ import '@rmwc/typography/styles';
 import { CircularProgress } from '@rmwc/circular-progress';
 import '@rmwc/circular-progress/styles';
 import { RouteComponentProps } from "@reach/router";
-import { get, post } from "../../../services/admin/guests";
+import { del, get, post } from "../../../services/admin/guests";
 import { CollapsibleList, ListDivider } from '@rmwc/list';
 import '@rmwc/list/styles';
 import { Fab } from '@rmwc/fab';
 import '@rmwc/fab/styles';
 import { TextField } from '@rmwc/textfield';
 import '@rmwc/textfield/styles';
+import { Select } from '@rmwc/select';
+import '@rmwc/select/styles';
+import { Checkbox } from '@rmwc/checkbox';
+import '@rmwc/checkbox/styles';
 import './invitees.css';
 import cloneDeep from 'lodash.clonedeep';
 import set from 'lodash.set';
@@ -23,6 +27,7 @@ import { IconButton } from "@rmwc/icon-button";
 import { Tooltip } from '@rmwc/tooltip';
 import '@rmwc/tooltip/styles';
 import { customAlphabet } from 'nanoid';
+
 const nanoid = customAlphabet('23456789abcdefghjkmnpqrstuvwrxyz', 5);
 const HouseholdRESTEndpoint = 'households';
 interface IGuest {
@@ -36,6 +41,7 @@ interface IHousehold {
   rsvp: 0 | 1 | 2;
   guests: IGuest[];
   rsvpid: string;
+  afterParty: boolean;
 }
 interface INewHouseHold extends IHousehold {
   _newParty?: boolean;
@@ -49,11 +55,24 @@ const RSVPIcons = [
 
 const PartyCard: React.FC<{ party: INewHouseHold, updateFn: () => void }> = ({ party, updateFn }) => {
   const [isEditing, setIsEditing] = useState(party._newParty);
-  const isEditingCallback = useCallback(() => setIsEditing(!isEditing), [isEditing]);
+  const [explode, setExplode] = useState(undefined);
+  useEffect(() => setExplode(isEditing), [isEditing]);
+  useEffect(() => {
+    if (explode === false) setExplode(undefined)
+  }, [explode])
+  const isEditingCallback = useCallback(() => {
+    setIsEditing(!isEditing);
+  }, [isEditing]);
+  const enhancedUpdate = () => {
+    setIsEditing(false);
+    updateFn();
+  }
   const [partyForm, setPartyForm] = useState(cloneDeep(party));
   const handleChange = ({ target }) => {
+    console.warn(target);
     const newStateValue = cloneDeep(partyForm);
     set(newStateValue, target.name, target.value);
+    console.warn(newStateValue);
     setPartyForm(newStateValue);
   }
   const cancelEdit = () => {
@@ -70,7 +89,7 @@ const PartyCard: React.FC<{ party: INewHouseHold, updateFn: () => void }> = ({ p
     if (!newStateValue.rsvpid) {
       newStateValue.rsvpid = nanoid();
     }
-    post<IHousehold>(HouseholdRESTEndpoint, newStateValue).then(() => updateFn());
+    post<IHousehold>(HouseholdRESTEndpoint, newStateValue).then(enhancedUpdate);
 
     setPartyForm(newStateValue);
     setIsEditing(false);
@@ -85,10 +104,16 @@ const PartyCard: React.FC<{ party: INewHouseHold, updateFn: () => void }> = ({ p
     newStateValue.guests.splice(idx, 1);
     setPartyForm(newStateValue);
   }
+  const deleteParty = () => del(HouseholdRESTEndpoint, partyForm._id).then(enhancedUpdate);
   return (
     <Card className={'guest-card'}>
+      <style scoped>{`
+        .mdc-checkbox__native-control:enabled:checked ~ .mdc-checkbox__background {
+          background-color: var(--mdc-theme-primary);
+          border-color: var(--mdc-theme-primary);
+      `}</style>
       <CardPrimaryAction>
-        <CollapsibleList open={isEditing} style={{ padding: '1rem' }} handle={
+        <CollapsibleList open={explode} style={{ padding: '1rem' }} handle={
           <Typography use='headline6' style={{ display: 'inline-block' }}>
             {partyForm.name}
           </Typography>}>
@@ -100,7 +125,23 @@ const PartyCard: React.FC<{ party: INewHouseHold, updateFn: () => void }> = ({ p
               name='name'
               onChange={handleChange} />
             : null}
-          <Typography use='body2' style={{ display: 'flex', alignItems: 'center' }}>RSVP Status: <Icon icon={RSVPIcons[party.rsvp][0]} style={{ paddingLeft: '1rem', color: `var(${RSVPIcons[party.rsvp][1]})` }} /></Typography>
+          {isEditing ?
+            <Select
+              label='RSVP'
+              onChange={({ target }) => handleChange({ target: { ...target, name: 'rsvp', value: parseInt((target as any).value, 10) } })}>
+              <option value='0'>Attending</option>
+              <option value='1'>Not Attending</option>
+              <option value='2'>Pending</option>
+            </Select> :
+            <Typography use='body2' style={{ display: 'flex', alignItems: 'center', padding: '0.5rem 0' }}>RSVP Status: <Icon icon={RSVPIcons[party.rsvp][0]} style={{ paddingLeft: '0.5rem', color: `var(${RSVPIcons[party.rsvp][1]})` }} /></Typography>
+          }
+          <ListDivider />
+          <Typography use='body2' style={{ display: 'flex', alignItems: 'center', padding: '0.5rem 0' }}>
+            Invited to Day after Party: {isEditing ?
+              <Checkbox checked={partyForm.afterParty ?? false} onChange={({ target }) => handleChange({ target: { ...target, name: 'afterParty', value: (target as any).checked } })} theme={['primary', 'onPrimary', 'primaryBg']} /> :
+              <Icon icon={partyForm.afterParty ? 'check' : 'cancel'} style={{ paddingLeft: '0.5rem', color: `var(${RSVPIcons[partyForm.afterParty ? 0 : 1][1]})` }} />}
+          </Typography>
+
         </CollapsibleList>
       </CardPrimaryAction>
       <ListDivider />
@@ -150,7 +191,11 @@ const PartyCard: React.FC<{ party: INewHouseHold, updateFn: () => void }> = ({ p
         </Typography>
         <CardActionIcons>
           {!isEditing ?
-            <CardActionIcon icon='edit' onClick={isEditingCallback} /> :
+            <>
+              <CardActionIcon icon='delete' onClick={deleteParty} />
+              <CardActionIcon icon='edit' onClick={isEditingCallback} />
+            </>
+            :
             <>
               <CardActionIcon icon='cancel' onClick={cancelEdit} />
               <CardActionIcon icon='save' onClick={commitEdit} />
@@ -175,6 +220,7 @@ const PartyCardGrid: React.FC<{ parties: IHousehold[], updateFn: () => void }> =
 
 const InviteesPage: React.FC<RouteComponentProps> = () => {
   const [data, setData] = useState(null);
+  const [filterData, setFilterData] = useState(null);
   const [progress, setProgress] = useState(true);
   const [doUpdate, setDoUpdate] = useState(true);
   const updateDaddy = () => setDoUpdate(true);
@@ -183,13 +229,15 @@ const InviteesPage: React.FC<RouteComponentProps> = () => {
       const result = await get<Array<IHousehold>>(HouseholdRESTEndpoint);
       setData(result[HouseholdRESTEndpoint]);
       setDoUpdate(false);
-      console.warn('getting new data');
     }
     doFetch();
   }, [doUpdate]);
 
   useEffect(() => {
-    if (data) setProgress(false);
+    if (data) {
+      setProgress(false);
+      setFilterData(data);
+    }
   }, [data]);
 
   const addPartyCallback = () => {
@@ -202,6 +250,19 @@ const InviteesPage: React.FC<RouteComponentProps> = () => {
     window.scrollTo(0, 0);
     setData(newData);
   }
+  const [filter, setFilter] = useState('');
+  const handleFilterChange = ({ target }) => {
+    setFilter(target.value);
+  }
+  useEffect(() => {
+    if (filterData) {
+      const regex = new RegExp(`${filter}`, 'i');
+      const filterResult = data.filter(d => {
+        return regex.test(d.name);
+      });
+      setFilterData(filterResult);
+    }
+  }, [filter]);
   return (
     <>
       <Grid>
@@ -210,8 +271,16 @@ const InviteesPage: React.FC<RouteComponentProps> = () => {
             Parties
           </Typography>
         </GridCell>
+        <GridCell tablet={4}>
+          <TextField
+            style={{ width: '100%' }}
+            name={'party-name-filter'}
+            value={filter}
+            label='Filter parties'
+            onChange={handleFilterChange} />
+        </GridCell>
         <GridCell span={12}>
-          {progress ? <CircularProgress size='xlarge' theme='secondary' /> : <PartyCardGrid parties={data} updateFn={updateDaddy} />}
+          {progress ? <CircularProgress size='xlarge' theme='secondary' /> : <PartyCardGrid parties={filterData} updateFn={updateDaddy} />}
         </GridCell>
       </Grid>
       <Fab icon='add' label='Add Guest' onClick={addPartyCallback} theme={['onPrimary', 'primaryBg']} />
