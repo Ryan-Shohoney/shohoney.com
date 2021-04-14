@@ -11,3 +11,10 @@ export async function get<T>(restEndpoint: string): Promise<T> {
   const json = await result.json();
   return json;
 }
+
+export async function post<T>(restEndpoint: string, body: T): Promise<void> {
+  const result = await fetch(`${process.env.SERVICE_URL}/${restEndpoint}`, {
+    method: 'POST',
+    body: JSON.stringify(body),
+  });
+}
