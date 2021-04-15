@@ -8,19 +8,18 @@ import '@rmwc/elevation/styles';
 import { List, ListItem } from '@rmwc/list';
 import '@rmwc/list/styles';
 import { Link } from "gatsby";
-import { logout, SessionCheck } from "../../../services/auth";
 import { Icon } from "@rmwc/icon";
 import './layout.css';
+import useAuth0 from "@auth0/auth0-react/src/use-auth0";
 interface IOwnProps {
   user: any;
 }
 
 export const AdminLayout: React.FC<IOwnProps> = ({ user, children }) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
-
+  const { logout } = useAuth0();
   return (
     <>
-      <SessionCheck />
       <div>
         <Drawer modal open={drawerOpen} onClose={() => setDrawerOpen(false)} className='admin-drawer'>
           <DrawerHeader>
@@ -39,7 +38,7 @@ export const AdminLayout: React.FC<IOwnProps> = ({ user, children }) => {
               <ListItem>
                 <Link to='/admin/rsvp'>RSVP's</Link>
               </ListItem>
-              <ListItem onClick={logout}>
+              <ListItem onClick={() => logout({})}>
                 <Link to='/'>
                   Logout
                   <Icon icon='logout' />

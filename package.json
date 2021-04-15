@@ -5,6 +5,7 @@
   "version": "0.1.0",
   "author": "Ryan Shohoney <ryan.shohoney@gmail.com>",
   "dependencies": {
+    "@auth0/auth0-react": "^1.4.0",
     "@fontsource/italianno": "^4.2.2",
     "@fontsource/josefin-sans": "^4.2.2",
     "@fontsource/material-icons": "^4.2.4",

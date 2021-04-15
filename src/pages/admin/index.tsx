@@ -5,7 +5,7 @@ import React from "react";
 import { AdminLayout } from "../../components/admin/layout";
 import RSVPPage from './rsvps';
 import GuestsPage from './invitees';
-import { getProfile, isAuthenticated, login } from "../../services/auth";
+import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 
 
 const AdminPage: React.FC<RouteComponentProps> = () => {
@@ -19,12 +19,7 @@ const AdminPage: React.FC<RouteComponentProps> = () => {
 };
 
 const AdminApp: React.FC<PageProps> = () => {
-  if (!isAuthenticated()) {
-    login();
-    return <Typography use='headline3'>Redirecting to login...</Typography>
-  }
-
-  const user = getProfile();
+  const { user } = useAuth0();
   return (
     <AdminLayout user={user}>
       <Router>
@@ -36,4 +31,4 @@ const AdminApp: React.FC<PageProps> = () => {
   )
 }
 
-export default AdminApp;
+export default withAuthenticationRequired(AdminApp);
