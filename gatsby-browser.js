@@ -24,9 +24,9 @@ const onRedirectCallback = (appState) => {
 export const wrapPageElement = ({ element, props }) => {
   return (
     <Auth0Provider
-      domain={process.env.AUTH0_DOMAIN}
-      clientId={process.env.AUTH0_CLIENTID}
-      redirectUri={process.env.AUTH0_CALLBACK}
+      domain={process.env.GATSBY_AUTH0_DOMAIN}
+      clientId={process.env.GATSBY_AUTH0_CLIENTID}
+      redirectUri={process.env.GATSBY_AUTH0_CALLBACK}
       onRedirectCallback={onRedirectCallback}
     >
       <RMWCProvider {...props}>
