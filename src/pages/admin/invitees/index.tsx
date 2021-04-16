@@ -41,7 +41,7 @@ interface IHousehold {
   rsvp: 0 | 1 | 2;
   guests: IGuest[];
   rsvpid: string;
-  afterParty: boolean;
+  invitedToAfterParty: boolean;
 }
 interface INewHouseHold extends IHousehold {
   _newParty?: boolean;
@@ -56,6 +56,7 @@ const RSVPIcons = [
 const PartyCard: React.FC<{ party: INewHouseHold, updateFn: () => void }> = ({ party, updateFn }) => {
   const [isEditing, setIsEditing] = useState(party._newParty);
   const [explode, setExplode] = useState(undefined);
+  const [progress, setProgress] = useState(false);
   useEffect(() => setExplode(isEditing), [isEditing]);
   useEffect(() => {
     if (explode === false) setExplode(undefined)
@@ -65,6 +66,7 @@ const PartyCard: React.FC<{ party: INewHouseHold, updateFn: () => void }> = ({ p
   }, [isEditing]);
   const enhancedUpdate = () => {
     setIsEditing(false);
+    setProgress(false);
     updateFn();
   }
   const [partyForm, setPartyForm] = useState(cloneDeep(party));
@@ -89,6 +91,7 @@ const PartyCard: React.FC<{ party: INewHouseHold, updateFn: () => void }> = ({ p
     if (!newStateValue.rsvpid) {
       newStateValue.rsvpid = nanoid();
     }
+    setProgress(true);
     post<IHousehold>(HouseholdRESTEndpoint, newStateValue).then(enhancedUpdate);
 
     setPartyForm(newStateValue);
@@ -104,7 +107,10 @@ const PartyCard: React.FC<{ party: INewHouseHold, updateFn: () => void }> = ({ p
     newStateValue.guests.splice(idx, 1);
     setPartyForm(newStateValue);
   }
-  const deleteParty = () => del(HouseholdRESTEndpoint, partyForm._id).then(enhancedUpdate);
+  const deleteParty = () => {
+    setProgress(true);
+    del(HouseholdRESTEndpoint, partyForm._id).then(enhancedUpdate)
+  };
   return (
     <Card className={'guest-card'}>
       <style scoped>{`
@@ -128,6 +134,7 @@ const PartyCard: React.FC<{ party: INewHouseHold, updateFn: () => void }> = ({ p
           {isEditing ?
             <Select
               label='RSVP'
+              defaultValue={`${partyForm.rsvp}`}
               onChange={({ target }) => handleChange({ target: { ...target, name: 'rsvp', value: parseInt((target as any).value, 10) } })}>
               <option value='0'>Attending</option>
               <option value='1'>Not Attending</option>
@@ -138,8 +145,8 @@ const PartyCard: React.FC<{ party: INewHouseHold, updateFn: () => void }> = ({ p
           <ListDivider />
           <Typography use='body2' style={{ display: 'flex', alignItems: 'center', padding: '0.5rem 0' }}>
             Invited to Day after Party: {isEditing ?
-              <Checkbox checked={partyForm.afterParty ?? false} onChange={({ target }) => handleChange({ target: { ...target, name: 'afterParty', value: (target as any).checked } })} theme={['primary', 'onPrimary', 'primaryBg']} /> :
-              <Icon icon={partyForm.afterParty ? 'check' : 'cancel'} style={{ paddingLeft: '0.5rem', color: `var(${RSVPIcons[partyForm.afterParty ? 0 : 1][1]})` }} />}
+              <Checkbox checked={partyForm.invitedToAfterParty ?? false} onChange={({ target }) => handleChange({ target: { ...target, name: 'invitedToAfterParty', value: (target as any).checked } })} theme={['primary', 'onPrimary', 'primaryBg']} /> :
+              <Icon icon={partyForm.invitedToAfterParty ? 'check' : 'cancel'} style={{ paddingLeft: '0.5rem', color: `var(${RSVPIcons[partyForm.invitedToAfterParty ? 0 : 1][1]})` }} />}
           </Typography>
 
         </CollapsibleList>
@@ -190,15 +197,16 @@ const PartyCard: React.FC<{ party: INewHouseHold, updateFn: () => void }> = ({ p
           RSVP Code: {partyForm.rsvpid}
         </Typography>
         <CardActionIcons>
+          {progress && <CardActionIcon icon={<CircularProgress />} />}
           {!isEditing ?
             <>
-              <CardActionIcon icon='delete' onClick={deleteParty} />
-              <CardActionIcon icon='edit' onClick={isEditingCallback} />
+              <CardActionIcon icon='delete' onClick={deleteParty} disabled={progress} />
+              <CardActionIcon icon='edit' onClick={isEditingCallback} disabled={progress} />
             </>
             :
             <>
-              <CardActionIcon icon='cancel' onClick={cancelEdit} />
-              <CardActionIcon icon='save' onClick={commitEdit} />
+              <CardActionIcon icon='cancel' onClick={cancelEdit} disabled={progress} />
+              <CardActionIcon icon='save' onClick={commitEdit} disabled={progress} />
             </>}
 
         </CardActionIcons>

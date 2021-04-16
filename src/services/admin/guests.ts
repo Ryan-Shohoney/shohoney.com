@@ -13,15 +13,14 @@ export async function get<T>(restEndpoint: string): Promise<T> {
 }
 
 export async function post<T>(restEndpoint: string, body: T): Promise<void> {
-  const result = await fetch(`${API_URI}/${restEndpoint}`, {
+  await fetch(`${API_URI}/${restEndpoint}`, {
     method: 'POST',
     body: JSON.stringify(body),
   });
 }
 
 export async function del(restEndpoint: string, body: { _id: string }): Promise<void> {
-  console.warn(body);
-  await fetch(`${API_URI}/${restEndpoint}?party=${body}`, {
+  fetch(`${API_URI}/${restEndpoint}?party=${body}`, {
     method: 'DELETE',
     body: JSON.stringify(body),
   });
