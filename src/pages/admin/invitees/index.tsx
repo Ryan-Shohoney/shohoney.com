@@ -71,10 +71,8 @@ const PartyCard: React.FC<{ party: INewHouseHold, updateFn: () => void }> = ({ p
   }
   const [partyForm, setPartyForm] = useState(cloneDeep(party));
   const handleChange = ({ target }) => {
-    console.warn(target);
     const newStateValue = cloneDeep(partyForm);
     set(newStateValue, target.name, target.value);
-    console.warn(newStateValue);
     setPartyForm(newStateValue);
   }
   const cancelEdit = () => {

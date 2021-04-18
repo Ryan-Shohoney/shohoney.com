@@ -15,7 +15,6 @@ const RSVPCode: React.FC<IFormDataProps> = ({ navigate, setFormData, step }) => 
       const validId = new RegExp(nanoidRegex).test(rsvpid);
       const doFetch = async () => {
         const { party, error } = await get<any>(`rsvp?rsvpid=${rsvpid}`);
-        console.warn(party);
         if (party.rsvp !== 1) {
           setFormData(prev => ({
             ...prev,

@@ -5,6 +5,7 @@ import { CircularProgress } from '@rmwc/circular-progress';
 import { Typography } from '@rmwc/typography';
 import RSVPCode from './rsvp-code';
 import AttendingConfirmation from './attending-confirmation';
+import GuestsForm from './guests';
 
 export interface IFormDataProps {
   setFormData: React.Dispatch<React.SetStateAction<any>>;
@@ -27,6 +28,7 @@ export const RSVPForm: React.FC = () => {
   const steps = [
     RSVPCode,
     AttendingConfirmation,
+    GuestsForm,
   ];
   const StepComp = steps[step];
   return (

@@ -10,6 +10,7 @@ import { IFormDataProps } from '..';
 
 const AttendingConfirmation: React.FC<IFormDataProps> = ({ navigate, setFormData, step, formData }) => {
   const { party } = formData[`step${step}`];
+  console.warn(party);
   const [radioValue, setRadioValue] = useState();
   const [formValue, setFormValue] = useState(null);
   const [confirmDialog, setConfirmDialog] = useState(false);
@@ -26,7 +27,11 @@ const AttendingConfirmation: React.FC<IFormDataProps> = ({ navigate, setFormData
       });
       setFormData(prev => ({
         ...prev,
-        [`step${step + 1}`]: prev[`step${step}`]
+        [`step${step}`]: {
+          ...formData[`step${step}`],
+          valid: true,
+        },
+        [`step${step + 1}`]: { party }
       }));
     }
     if (formValue !== null) {
