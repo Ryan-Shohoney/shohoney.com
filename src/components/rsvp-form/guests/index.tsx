@@ -64,9 +64,7 @@ const GuestsForm: React.FC<IFormDataProps> = ({ navigate, setFormData, step, for
     return tmp;
   });
   useEffect(() => {
-    console.warn(party);
     if (party.rsvp === 1) {
-      console.warn('setting form to advance');
       setFormData(prev => ({
         ...prev,
         [`step${step}`]: {
@@ -97,7 +95,7 @@ const GuestsForm: React.FC<IFormDataProps> = ({ navigate, setFormData, step, for
     }
   }, [navigate]);
   useEffect(() => {
-    if (guestList && party.rsvp !== 1) {
+    if (guestList) {
       setFormData(prev => ({
         ...prev,
         [`step${step}`]: {

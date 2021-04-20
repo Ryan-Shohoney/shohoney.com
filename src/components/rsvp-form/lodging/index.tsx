@@ -64,18 +64,6 @@ const LodgingForm: React.FC<IFormDataProps> = ({ navigate, setFormData, step, fo
     stateSetters[t.name](t.value);
   }
   useEffect(() => {
-    if (party.rsvp === 1) {
-      setFormData(prev => ({
-        ...prev,
-        [`step${step}`]: {
-          ...formData[`step${step}`],
-          valid: true,
-        },
-        [`step${step + 1}`]: { party }
-      }));
-    }
-  }, [formData, setFormData]);
-  useEffect(() => {
     setIsValid((lodgingValue === lodgingValues[0].value) || (lodgingValue && durationValue));
   }, [lodgingValue, durationValue]);
   useEffect(() => {

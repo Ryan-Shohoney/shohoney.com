@@ -31,22 +31,9 @@ const WelcomePartyForm: React.FC<IFormDataProps> = ({ navigate, formData, step, 
   }
 
   useEffect(() => {
-    if (party.rsvp === 1) {
-      setFormData(prev => ({
-        ...prev,
-        [`step${step}`]: {
-          ...formData[`step${step}`],
-          valid: true,
-        },
-        [`step${step + 1}`]: { party }
-      }));
-    }
-  }, [formData, setFormData]);
-
-  useEffect(() => {
     if (navigate && attendanceValue !== null) {
       (async () => {
-        const result = await post<any>('/rsvp', {
+        const result = await post<any>('rsvp', {
           rsvpid: party.rsvpid,
           welcomeParty: {
             attending: attendanceValue,

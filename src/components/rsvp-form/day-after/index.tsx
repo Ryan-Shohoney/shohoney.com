@@ -28,7 +28,7 @@ const DayAfterForm: React.FC<IFormDataProps> = ({ navigate, setFormData, formDat
     setAttendanceValue(target.value);
   }
   useEffect(() => {
-    if (!party.ap || party.rsvp === 1) {
+    if (!party.ap) {
       setFormData(prev => ({
         ...prev,
         [`step${step}`]: {

@@ -23,6 +23,7 @@ const AttendingConfirmation: React.FC<IFormDataProps> = ({ navigate, setFormData
         ...party,
         rsvp: formValue,
       });
+
       setFormData(prev => ({
         ...prev,
         [`step${step}`]: {

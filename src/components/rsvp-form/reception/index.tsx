@@ -82,18 +82,7 @@ const ReceptionForm: React.FC<IFormDataProps> = ({ navigate, formData, setFormDa
       }));
     }
   }, [guestList, shuttle]);
-  useEffect(() => {
-    if (party.rsvp === 1) {
-      setFormData(prev => ({
-        ...prev,
-        [`step${step}`]: {
-          ...formData[`step${step}`],
-          valid: true,
-        },
-        [`step${step + 1}`]: { party }
-      }));
-    }
-  }, [formData, setFormData]);
+
   useEffect(() => {
     if (navigate) {
       const dofetch = async () => {
