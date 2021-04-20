@@ -1593,6 +1593,25 @@
   resolved "https://registry.yarnpkg.com/@material/density/-/density-5.1.0.tgz#d36512d413a00595122f98303766dae6b9e9fabe"
   integrity sha512-jmp6AgiNYosl+HicxWCa8vib9pg9tNxRcf+6f9LDkDYJ9jtO90PXuypyd0hO64JZ9Df7BywFj5hTWPERG1FBbw==
 
+"@material/dialog@^5.1.0":
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/@material/dialog/-/dialog-5.1.0.tgz#3ea64b22b728e1e1251aaf0bb4b4a675aad73785"
+  integrity sha512-CxA0W0uzXuwJNivB6Gbb7DvtJL3+J7ghsaSL1HfycXVXfdrT1nSidLyOIthRMVBUBJrAMfusvtzFDgXr0TWqDg==
+  dependencies:
+    "@material/animation" "^5.1.0"
+    "@material/base" "^5.1.0"
+    "@material/button" "^5.1.0"
+    "@material/dom" "^5.1.0"
+    "@material/elevation" "^5.1.0"
+    "@material/feature-targeting" "^5.1.0"
+    "@material/ripple" "^5.1.0"
+    "@material/rtl" "^5.1.0"
+    "@material/shape" "^5.1.0"
+    "@material/theme" "^5.1.0"
+    "@material/touch-target" "^5.1.0"
+    "@material/typography" "^5.1.0"
+    tslib "^1.9.3"
+
 "@material/dom@^5.1.0":
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/@material/dom/-/dom-5.1.0.tgz#fefb96e1f744653dfc3ecdb01f7ebef81ce1faeb"
@@ -1760,6 +1779,21 @@
     "@material/rtl" "^5.1.0"
     "@material/shape" "^5.1.0"
     "@material/theme" "^5.1.0"
+    tslib "^1.9.3"
+
+"@material/radio@^5.1.0":
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/@material/radio/-/radio-5.1.0.tgz#4220369fe89c2cee8a9549b505d857a6efc6108c"
+  integrity sha512-srAchlY1TKkmQAdMHqbP9vLkN7gmiWX6FGzArgKomd6Es8OqF2P3jvPcQizqz4OFYZIMrxARdW6r8QvhG0lZEg==
+  dependencies:
+    "@material/animation" "^5.1.0"
+    "@material/base" "^5.1.0"
+    "@material/density" "^5.1.0"
+    "@material/dom" "^5.1.0"
+    "@material/feature-targeting" "^5.1.0"
+    "@material/ripple" "^5.1.0"
+    "@material/theme" "^5.1.0"
+    "@material/touch-target" "^5.1.0"
     tslib "^1.9.3"
 
 "@material/ripple@^5.1.0":
@@ -2014,6 +2048,17 @@
     "@rmwc/switch" "^6.1.4"
     "@rmwc/types" "^6.0.5"
 
+"@rmwc/dialog@^6.1.4":
+  version "6.1.4"
+  resolved "https://registry.yarnpkg.com/@rmwc/dialog/-/dialog-6.1.4.tgz#9245943b2aba0eaa33b730a3487d0532f7a79af7"
+  integrity sha512-LzoBrBAfR06EizPGT4rWS/K+hNCrxRZwnoQrXm6c8aLejtLImfqTbU1QgwEDRO+EK7IBvhCrR71HyhXQViI1xA==
+  dependencies:
+    "@material/dialog" "^5.1.0"
+    "@rmwc/base" "^6.1.4"
+    "@rmwc/button" "^6.1.4"
+    "@rmwc/textfield" "^6.1.4"
+    "@rmwc/types" "^6.0.5"
+
 "@rmwc/drawer@^6.1.4":
   version "6.1.4"
   resolved "https://registry.yarnpkg.com/@rmwc/drawer/-/drawer-6.1.4.tgz#af3a6d2b12655256c844e185eae934b549a94b85"
@@ -2138,6 +2183,18 @@
   integrity sha512-883PclFrzv6KL/2R613/zdBDZe2d5nAWkT8PEU5z9ddWhOG95sJVj2/uuTc2M/l/vnstOI5YtmkbFvYYVd4XBQ==
   dependencies:
     "@rmwc/base" "^6.1.4"
+    "@rmwc/types" "^6.0.5"
+
+"@rmwc/radio@^6.1.4":
+  version "6.1.4"
+  resolved "https://registry.yarnpkg.com/@rmwc/radio/-/radio-6.1.4.tgz#430b28fe7fbd5a6c7aa23bfaac49e9b93c3c4053"
+  integrity sha512-DVQsX4Xevc9NV4opH07uJyhTe8FhBKnJFLetXncj5UKUC1HpCyIIV5/0TrRLPCXUCaTrLndcOyyER2pI7al+Uw==
+  dependencies:
+    "@material/radio" "^5.1.0"
+    "@rmwc/base" "^6.1.4"
+    "@rmwc/formfield" "^6.1.4"
+    "@rmwc/ripple" "^6.1.4"
+    "@rmwc/toggleable" "^6.1.4"
     "@rmwc/types" "^6.0.5"
 
 "@rmwc/ripple@^6.1.4":
