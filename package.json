@@ -26,6 +26,7 @@
     "@rmwc/provider": "^6.1.4",
     "@rmwc/radio": "^6.1.4",
     "@rmwc/select": "^6.1.4",
+    "@rmwc/switch": "^6.1.4",
     "@rmwc/textfield": "^6.1.4",
     "@rmwc/theme": "^6.1.4",
     "@rmwc/tooltip": "^6.1.4",

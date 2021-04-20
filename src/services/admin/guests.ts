@@ -12,11 +12,13 @@ export async function get<T>(restEndpoint: string): Promise<T> {
   return json;
 }
 
-export async function post<T>(restEndpoint: string, body: T): Promise<void> {
-  await fetch(`${API_URI}/${restEndpoint}`, {
+export async function post<T>(restEndpoint: string, body: T): Promise<void | any> {
+  const result = await fetch(`${API_URI}/${restEndpoint}`, {
     method: 'POST',
     body: JSON.stringify(body),
   });
+  const json = await result.json();
+  return json;
 }
 
 export async function del(restEndpoint: string, body: { _id: string }): Promise<void> {

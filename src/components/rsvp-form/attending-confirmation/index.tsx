@@ -10,8 +10,7 @@ import { IFormDataProps } from '..';
 
 const AttendingConfirmation: React.FC<IFormDataProps> = ({ navigate, setFormData, step, formData }) => {
   const { party } = formData[`step${step}`];
-  console.warn(party);
-  const [radioValue, setRadioValue] = useState();
+  const [radioValue, setRadioValue] = useState(party.rsvp !== 2 ? party.rsvp.toString() : null);
   const [formValue, setFormValue] = useState(null);
   const [confirmDialog, setConfirmDialog] = useState(false);
 
@@ -20,24 +19,23 @@ const AttendingConfirmation: React.FC<IFormDataProps> = ({ navigate, setFormData
   };
   useEffect(() => {
     const doFetch = async () => {
-      await post<any>('/rsvp', {
-        rsvpid: party.rsvpid,
+      const result = await post<any>('/rsvp', {
+        ...party,
         rsvp: formValue,
-        name: party.name,
       });
       setFormData(prev => ({
         ...prev,
         [`step${step}`]: {
-          ...formData[`step${step}`],
           valid: true,
+          ...result,
         },
-        [`step${step + 1}`]: { party }
+        [`step${step + 1}`]: result,
       }));
     }
-    if (formValue !== null) {
+    if (navigate && formValue !== null) {
       doFetch();
     }
-  }, [formValue])
+  }, [formValue, navigate])
   useEffect(() => {
     if (navigate) {
       if (radioValue !== null) {
@@ -61,12 +59,6 @@ const AttendingConfirmation: React.FC<IFormDataProps> = ({ navigate, setFormData
   return (
     <>
       <div style={{ textAlign: 'center' }}>
-        <style scoped>{`
-        .mdc-radio .mdc-radio__native-control:enabled:checked + .mdc-radio__background .mdc-radio__outer-circle,
-        .mdc-radio .mdc-radio__native-control:enabled + .mdc-radio__background .mdc-radio__inner-circle {
-          border-color: var(--mdc-theme-primary);
-        }
-      `}</style>
         <Typography use='headline6' style={{ paddingBottom: '1rem' }}>
           Welcome, {party.name}
         </Typography>
