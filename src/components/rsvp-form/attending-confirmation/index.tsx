@@ -19,7 +19,7 @@ const AttendingConfirmation: React.FC<IFormDataProps> = ({ navigate, setFormData
   };
   useEffect(() => {
     const doFetch = async () => {
-      const result = await post<any>('/rsvp', {
+      const result = await post<any>('rsvp', {
         ...party,
         rsvp: formValue,
       });

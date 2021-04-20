@@ -84,7 +84,7 @@ const LodgingForm: React.FC<IFormDataProps> = ({ navigate, setFormData, step, fo
         durationDetail,
       };
       const dofetch = async () => {
-        const result = await post<any>('/rsvp', {
+        const result = await post<any>('rsvp', {
           rsvpid: party.rsvpid,
           lodging,
         });

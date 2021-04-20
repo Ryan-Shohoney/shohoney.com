@@ -52,7 +52,7 @@ const DayAfterForm: React.FC<IFormDataProps> = ({ navigate, setFormData, formDat
   useEffect(() => {
     if (navigate && attendanceValue !== null) {
       (async () => {
-        const result = await post<any>('/rsvp', {
+        const result = await post<any>('rsvp', {
           rsvpid: party.rsvpid,
           dayAfterParty: attendanceValue,
         });
