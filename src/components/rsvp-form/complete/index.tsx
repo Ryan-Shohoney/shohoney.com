@@ -53,15 +53,14 @@ const CompleteForm: React.FC<IFormDataProps> = ({ navigate, formData, step, setF
     <>
       <div style={{ textAlign: 'center', maxWidth: '50rem' }}>
         <Typography use='headline6' style={{ paddingBottom: '1rem', display: 'inline-block' }}>
-          Thank you! We appreciate you taking the time to RSVP online.  This will help us make sure that our big weekend goes smoothly.
+          Thank you! We appreciate you taking the time to RSVP online.
         </Typography>
         <br />
         <Typography use='body1' style={{ paddingBottom: '1rem', display: 'inline-block' }}>
           {party.rsvp !== 1 ? (
             <>
               We look forward to seeing you.  In order to keep things running smoothly, we'd like to ask for an email address,
-              so that we can contact you with any potential changes that may occur. If you're not comfortable with that, please keep
-              an eye on the website for potential changes.
+              so that we can contact you with any potential changes that may occur.
             </>
           ) : (
             <>

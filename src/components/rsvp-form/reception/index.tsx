@@ -108,8 +108,8 @@ const ReceptionForm: React.FC<IFormDataProps> = ({ navigate, formData, setFormDa
     <>
       <div style={{ textAlign: 'center', maxWidth: '45rem' }}>
         <Typography use='headline6'>
-          We will be providing shuttles from all of the hotels in our room block, to and from the reception.
-          Does your party plan on using those shuttes?
+          We will be providing shuttles from the hotels in our room block, to and from the reception. You are also welcome
+          to use the shuttles, even if you are not staying at one of the hotels. Does your party plan on using those shuttes?
         </Typography>
         <div style={{ display: 'flex', justifyContent: 'center', paddingBottom: '1rem' }}>
           <div style={{ maxWidth: '20rem' }}>

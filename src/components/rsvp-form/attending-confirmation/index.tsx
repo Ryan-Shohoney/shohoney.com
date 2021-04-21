@@ -61,15 +61,15 @@ const AttendingConfirmation: React.FC<IFormDataProps> = ({ navigate, setFormData
     <>
       <div style={{ textAlign: 'center' }}>
         <Typography use='headline6' style={{ paddingBottom: '1rem' }}>
-          Welcome, {party.name}
+          Welcome, {party.name}!
         </Typography>
         <br />
         <Typography use='body1' style={{ maxWidth: '30rem', paddingBottom: '1rem', display: 'inline-block' }}>
-          We hope that you will be able to attend. However, we also understand if you cannot attend.
+          We hope that you will be able to attend, but understand if you cannot.
       </Typography>
         <br />
         <Typography use='body2' style={{ maxWidth: '30rem', paddingBottom: '1rem', display: 'inline-block' }}>
-          If only some of your party is attending, please RSVP yes.  We'll allow you to change who's attending, on the next page.
+          If only some of your party is attending, RSVP yes.  We'll allow you to change who's attending, on the next page.
       </Typography>
         <br />
         <div>

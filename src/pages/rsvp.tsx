@@ -15,8 +15,12 @@ const RSVPPage: React.FC<PageProps> = () => {
         <GridCell span={12}>
           <Typography use='headline4'>RSVP</Typography>
         </GridCell>
-        {!rsvpStarted && <GridCell span={12}>
-          <Typography use="body1">We're happy you're here.  We'll walk you through all of the information we need.  Just come with your RSVP code, and we should be able to provide the rest!</Typography>
+        {!rsvpStarted && <GridCell span={12} style={{ textAlign: 'center' }}>
+          <Typography use="headline6" style={{ maxWidth: '45rem', textAlign: 'center', display: 'inline-block' }}>
+            We're happy you're here.  We'll walk you through all of the information we need.
+            Before you start, you'll want to have your RSVP code, your lodging information,
+            and the meal selections for everyone in your party
+          </Typography>
         </GridCell>}
         <GridCell span={12}>
           <RSVPForm startRsvp={setRsvpStarted} />

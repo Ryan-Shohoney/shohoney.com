@@ -106,7 +106,7 @@ const LodgingForm: React.FC<IFormDataProps> = ({ navigate, setFormData, step, fo
       <div style={{ textAlign: 'center', maxWidth: '30rem' }}>
         <Typography use='headline6'>
           Please let us know whether or not you'll be staying at a hotel in the area. This will help us
-          ensure that our transportation schedule makes sense!
+          ensure that our transportation schedule makes sense.
         </Typography>
         <div style={{ display: 'flex', justifyContent: 'center', paddingBottom: '1rem' }}>
           <div style={{ maxWidth: '20rem' }}>

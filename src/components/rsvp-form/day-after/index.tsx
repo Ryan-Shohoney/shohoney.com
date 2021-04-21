@@ -72,8 +72,8 @@ const DayAfterForm: React.FC<IFormDataProps> = ({ navigate, setFormData, formDat
       <div style={{ textAlign: 'center', maxWidth: '45rem' }}>
         <Typography use='headline6'>
           We are hosting a day after party and open house for our wedding party, and our closest family members.
-          This will be hosted at our <a href='https://goo.gl/maps/2dMcxBJP4j5B6yvX7' target='_blank'>house</a> house,
-          in Monona. We will be serving lunch, as well as brunch cocktails.  Please feel free to come for as much,
+          This will be hosted at our <a href='https://goo.gl/maps/2dMcxBJP4j5B6yvX7' target='_blank'>house</a>,
+          in Monona from 11:00AM-2:00PM. We will be serving a light lunch, as well as brunch cocktails.  Please feel free to come for as much,
           or as little, as you'd like
         </Typography>
         <div style={{ display: 'flex', justifyContent: 'center', paddingBottom: '1rem' }}>

@@ -52,10 +52,13 @@ const RSVPCode: React.FC<IFormDataProps> = ({ navigate, setFormData, step }) => 
 
   return (
     <>
-      <Typography use='headline6' style={{ paddingBottom: '1rem' }}>
+      <Typography use='headline6' style={{ paddingBottom: '1rem', textAlign: 'center', maxWidth: '45rem', display: 'inline-block' }}>
         Please enter your RSVP code.  It should be on the bottom right corner of your RSVP card, in your invite.  It's 5 characters long.
       </Typography>
-      <TextField required label='RSVP Code' value={rsvpid} onChange={handleChange} maxLength={5} pattern={nanoidRegex} />
+      <br />
+      <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+        <TextField required label='RSVP Code' value={rsvpid} onChange={handleChange} maxLength={5} pattern={nanoidRegex} />
+      </div>
     </>
   )
 };

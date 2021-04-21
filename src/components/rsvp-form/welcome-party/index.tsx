@@ -18,7 +18,7 @@ const attendanceValues = [
   },
   {
     value: 'sortof',
-    text: 'We will be attending, but not eating'
+    text: 'We will be attending but not eating'
   }
 ]
 
@@ -70,8 +70,8 @@ const WelcomePartyForm: React.FC<IFormDataProps> = ({ navigate, formData, step, 
         </Typography>
         <br />
         <Typography use='body1' style={{ paddingBottom: '1rem', display: 'inline-block' }}>
-          We will be serving brats, burgers, and BBQ grilled chicken. We will also be serving beer and wine.
-          All of our guests are welcome to attend. Please let us know below if you plan on attending.
+          Brats, burgers, and BBQ grilled chicken will be served, along with beverages.
+          All of our guests are welcome to attend. We recommend that guests who have lawn chairs bring them.
         </Typography>
         <div style={{ display: 'flex', justifyContent: 'center', paddingBottom: '1rem' }}>
           <div style={{ maxWidth: '20rem' }}>
