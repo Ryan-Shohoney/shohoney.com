@@ -12,6 +12,7 @@ import "@rmwc/elevation/styles";
 import "@rmwc/top-app-bar/styles";
 import { Typography } from "@rmwc/typography";
 import "@rmwc/typography/styles";
+import { ButtonLink } from "./button-link";
 
 interface HeaderProps {
   siteTitle: string;
@@ -43,13 +44,7 @@ const Header: React.FC<HeaderProps> = (props) => {
             </TopAppBarTitle>
           </TopAppBarSection>
           <TopAppBarSection alignEnd>
-            <Typography
-              use="headline5"
-              className="caligraphy"
-              style={paddingRight1Rem}
-            >
-              7/17/2021
-            </Typography>
+            <ButtonLink buttonText='RSVP for 7/17/2021' buttonHref='/rsvp' raised outline={true} switchToSecondary switchToSecondaryBg />
           </TopAppBarSection>
         </TopAppBarRow>
       </TopAppBar>
