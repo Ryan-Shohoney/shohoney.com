@@ -43,8 +43,8 @@ const Header: React.FC<HeaderProps> = (props) => {
               </Link>
             </TopAppBarTitle>
           </TopAppBarSection>
-          <TopAppBarSection alignEnd>
-            <ButtonLink buttonText='RSVP for 7/17/2021' buttonHref='/rsvp' raised outline={true} switchToSecondary switchToSecondaryBg />
+          <TopAppBarSection alignEnd style={paddingRight1Rem}>
+            <ButtonLink buttonText={window.innerWidth <= 768 ? 'RSVP' : 'RSVP for 7/17/2021'} buttonHref='/rsvp' raised outline={true} switchToSecondary switchToSecondaryBg />
           </TopAppBarSection>
         </TopAppBarRow>
       </TopAppBar>
