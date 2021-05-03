@@ -6,15 +6,15 @@ import { Typography } from '@rmwc/typography';
 import { get, } from '../../../services/admin/guests';
 import { IFormDataProps } from '..';
 
-const nanoidRegex = '[23456789abcdefghjkmnpqrstuvwrxyz]{5}'
+const nanoidRegex = '[23456789abcdefghjkmnpqrstuvwrxyzABCDEFGHJKMNPQRSTUVWRXYZ]{5}'
 const RSVPCode: React.FC<IFormDataProps> = ({ navigate, setFormData, step }) => {
   const [rsvpid, setRsvpId] = useState('');
 
   useEffect(() => {
     if (navigate) {
-      const validId = new RegExp(nanoidRegex).test(rsvpid);
+      const validId = new RegExp(nanoidRegex, 'i').test(rsvpid);
       const doFetch = async () => {
-        const { party, error } = await get<any>(`rsvp?rsvpid=${rsvpid}`);
+        const { party, error } = await get<any>(`rsvp?rsvpid=${rsvpid.toLowerCase()}`);
         if (party && party.rsvp !== 1) {
           setFormData(prev => ({
             ...prev,
@@ -57,7 +57,7 @@ const RSVPCode: React.FC<IFormDataProps> = ({ navigate, setFormData, step }) => 
       </Typography>
       <br />
       <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
-        <TextField required label='RSVP Code' value={rsvpid} onChange={handleChange} maxLength={5} pattern={nanoidRegex} />
+        <TextField required label='RSVP Code' value={rsvpid} onChange={handleChange} maxLength={5} pattern={`${nanoidRegex}`} />
       </div>
     </>
   )

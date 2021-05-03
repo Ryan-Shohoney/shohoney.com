@@ -5,7 +5,7 @@ import Header from "./header";
 import "./layout.css";
 import { Typography } from "@rmwc/typography";
 import "@rmwc/typography/styles";
-
+import DelayPrompt from './delay-prompt';
 interface LayoutProps {
   timeString?: string;
 }
@@ -47,6 +47,13 @@ const Layout: React.FC<LayoutProps> = (props) => {
           <br />
         </footer>
       </div>
+      <DelayPrompt
+        title={'Need to RSVP?'}
+        text={'We recently updated the website to allow you to RSVP.  If you are here to do that, just follow the link below and we can get you started!'}
+        duration={5000}
+        cookieName='rsvpprompt'
+        dismissals={3}
+      />
     </>
   );
 };
