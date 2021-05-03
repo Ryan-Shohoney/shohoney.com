@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useLayoutEffect, useState } from "react";
 import { Link } from "gatsby";
 import {
   TopAppBar,
@@ -22,8 +22,18 @@ interface HeaderProps {
 const paddingRight1Rem = {
   paddingRight: "1rem",
 };
-
+const useWindowWidth = () => {
+  const [width, setWidth] = useState(window.innerWidth);
+  useLayoutEffect(() => {
+    const updateWidth = () => setWidth(window.innerWidth);
+    window.addEventListener('resize', updateWidth);
+    return () => window.removeEventListener('resize', updateWidth);
+  })
+  return width;
+}
 const Header: React.FC<HeaderProps> = (props) => {
+  const width = useWindowWidth();
+
   return (
     <Elevation z={4}>
       <TopAppBar theme={['onSecondary', 'secondaryBg']}>
@@ -44,7 +54,7 @@ const Header: React.FC<HeaderProps> = (props) => {
             </TopAppBarTitle>
           </TopAppBarSection>
           <TopAppBarSection alignEnd style={paddingRight1Rem}>
-            <ButtonLink buttonText={window.innerWidth <= 768 ? 'RSVP' : 'RSVP for 7/17/2021'} buttonHref='/rsvp' raised outline={true} switchToSecondary switchToSecondaryBg />
+            <ButtonLink buttonText={width <= 768 ? 'RSVP' : 'RSVP for 7/17/2021'} buttonHref='/rsvp' raised outline={true} switchToSecondary switchToSecondaryBg />
           </TopAppBarSection>
         </TopAppBarRow>
       </TopAppBar>
