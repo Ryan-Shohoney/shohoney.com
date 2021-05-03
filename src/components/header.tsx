@@ -22,17 +22,15 @@ interface HeaderProps {
 const paddingRight1Rem = {
   paddingRight: "1rem",
 };
-const useWindowWidth = () => {
-  const [width, setWidth] = useState(window.innerWidth);
+
+const Header: React.FC<HeaderProps> = (props) => {
+  const [width, setWidth] = useState(0);
   useLayoutEffect(() => {
     const updateWidth = () => setWidth(window.innerWidth);
     window.addEventListener('resize', updateWidth);
+    updateWidth();
     return () => window.removeEventListener('resize', updateWidth);
-  })
-  return width;
-}
-const Header: React.FC<HeaderProps> = (props) => {
-  const width = useWindowWidth();
+  }, [])
 
   return (
     <Elevation z={4}>
