@@ -3,7 +3,7 @@
   "private": true,
   "description": "Website currently being used for the wedding of Ryan Shohoney and Amanda Belanger",
   "version": "0.1.0",
-  "author": "Ryan Shohoney <ryan.shohoney@gmail.com>",
+  "author": "Ryan Shohoney <ryguy9829@gmail.com>",
   "dependencies": {
     "@auth0/auth0-react": "^1.4.0",
     "@fontsource/italianno": "^4.2.2",
