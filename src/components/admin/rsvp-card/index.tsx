@@ -1,13 +1,13 @@
 import React from 'react';
 import { Card } from '@rmwc/card';
 import '@rmwc/card/styles';
-import {mealValues} from '../../../../../components/rsvp-form/reception';
-import { IRsvp } from '../../index';
+import {mealValues} from '../../rsvp-form/reception';
+import { IRsvp } from '../../../pages/admin/rsvps';
 import { Typography } from '@rmwc/typography';
 import '@rmwc/typography/styles';
 import { Icon } from '@rmwc/icon';
 import '@rmwc/icon/styles';
-import { RSVPIcons } from '../../../invitees';
+import { RSVPIcons } from '../../../pages/admin/invitees';
 import { ListDivider } from '@rmwc/list';
 import '@rmwc/list/styles';
 

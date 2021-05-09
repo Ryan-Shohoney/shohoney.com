@@ -4,7 +4,7 @@ import '@rmwc/typography/styles';
 import { RouteComponentProps } from "@reach/router";
 import { get } from '../../../services/admin/guests';
 import { IGuest } from '../invitees';
-import RsvpCard from './components/rsvp-card';
+import RsvpCard from '../../../components/admin/rsvp-card';
 import { Grid, GridCell } from '@rmwc/grid';
 import '@rmwc/grid/styles';
 import { ChipSet, Chip } from '@rmwc/chip';
