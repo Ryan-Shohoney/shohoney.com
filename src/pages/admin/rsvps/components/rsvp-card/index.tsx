@@ -15,7 +15,7 @@ interface IProps {
   rsvp: IRsvp;
 }
 
-const RsvpCard: React.FC<IProps> = ({ rsvp }) => (
+const RsvpCard: React.FC<IProps> = ({ rsvp }) => rsvp && (
   <Card>
     <Typography use={'headline6'} style={{display: 'flex', alignItems: 'center', justifyContent:'space-between', padding: '1rem'}}>
       {rsvp.name}
