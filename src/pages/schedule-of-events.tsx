@@ -5,7 +5,7 @@ import Layout from "../components/layout";
 import { Grid, GridCell } from "@rmwc/grid";
 import { Typography } from "@rmwc/typography";
 import { Card, CardActionButtons, CardActionIcon } from "@rmwc/card";
-import { CollapsibleList, ListDivider, SimpleListItem } from "@rmwc/list";
+import { ListDivider } from "@rmwc/list";
 import { SaveTheDate } from "../components/save-the-date";
 import { cheaterMargin } from ".";
 import { ButtonLink } from "../components/button-link";
@@ -18,7 +18,7 @@ interface IEventItem {
   time: string;
   location: ILocation;
   saveTheDate?: string;
-  scheduleDetails?: string[];
+  scheduleDetails: string[];
   notes: string[];
 }
 interface ILocation {
@@ -44,6 +44,7 @@ const eventSchedule: IEventSchedule[] = [
           state: "Wisconsin",
           googleLink: "https://maps.app.goo.gl/TbCnXVBXjLxqvSdaA",
         },
+        scheduleDetails: [],
         notes: [
           "Open to all wedding guests.",
           "Beer and wine will be served",
@@ -68,6 +69,7 @@ const eventSchedule: IEventSchedule[] = [
           googleLink:
             "https://www.google.com/maps/place/Monona+Terrace+Community+and+Convention+Center/@43.0716832,-89.3801502,15z/data=!4m2!3m1!1s0x0:0xec3bcab772dbe6dd?sa=X&ved=2ahUKEwipq_aJn-ruAhUMbs0KHXNvACMQ_BIwFHoECCUQBQ",
         },
+        scheduleDetails: [],
         notes: [],
       },
       {

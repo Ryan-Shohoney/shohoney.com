@@ -30,7 +30,7 @@ import { customAlphabet } from 'nanoid';
 
 const nanoid = customAlphabet('23456789abcdefghjkmnpqrstuvwrxyz', 5);
 const HouseholdRESTEndpoint = 'households';
-interface IGuest {
+export interface IGuest {
   _id: string;
   firstName: string;
   lastName: string;
@@ -47,7 +47,7 @@ interface INewHouseHold extends IHousehold {
   _newParty?: boolean;
 }
 
-const RSVPIcons = [
+export const RSVPIcons = [
   ['check_circle', '--mdc-theme-primary'],
   ['cancel', '--mdc-theme-error'],
   ['help', '--mdc-theme-admin-warning'],

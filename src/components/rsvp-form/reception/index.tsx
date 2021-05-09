@@ -25,7 +25,7 @@ const transportValues = [
     text: 'No, we will not use the shuttles',
   }
 ];
-const mealValues = [
+export const mealValues = [
   {
     value: 'bc',
     label: 'Brandied Chicken Breast',

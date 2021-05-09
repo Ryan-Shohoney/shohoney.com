@@ -6,7 +6,7 @@ interface ImageProps {
   src: string;
 }
 
-const Image: React.FC<ImageProps> = ({ src }) => {
+const Image: React.FC<ImageProps> = () => {
   const data = useStaticQuery(graphql`
     query {
       placeholderImage: file(relativePath: { eq: "gatsby-astronaut.png" }) {

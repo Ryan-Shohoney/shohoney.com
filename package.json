@@ -13,6 +13,7 @@
     "@rmwc/button": "^6.1.4",
     "@rmwc/card": "^6.1.4",
     "@rmwc/checkbox": "^6.1.4",
+    "@rmwc/chip": "^6.1.4",
     "@rmwc/circular-progress": "^6.1.4",
     "@rmwc/data-table": "^6.1.4",
     "@rmwc/dialog": "^6.1.4",

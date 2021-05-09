@@ -1570,6 +1570,26 @@
     "@material/touch-target" "^5.1.0"
     tslib "^1.9.3"
 
+"@material/chips@^5.1.0":
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/@material/chips/-/chips-5.1.0.tgz#8bbd5b2be3300a9453cf6edd9186a7c0aa757ace"
+  integrity sha512-eYWrobENtXbnGoEx5BEURqoCfoc9aHu1JWq64mF12a/JSk+c035KYMjD4oyhow7dYqobbfQlWWdLQeHoRpYCeA==
+  dependencies:
+    "@material/animation" "^5.1.0"
+    "@material/base" "^5.1.0"
+    "@material/checkbox" "^5.1.0"
+    "@material/density" "^5.1.0"
+    "@material/dom" "^5.1.0"
+    "@material/elevation" "^5.1.0"
+    "@material/feature-targeting" "^5.1.0"
+    "@material/ripple" "^5.1.0"
+    "@material/rtl" "^5.1.0"
+    "@material/shape" "^5.1.0"
+    "@material/theme" "^5.1.0"
+    "@material/touch-target" "^5.1.0"
+    "@material/typography" "^5.1.0"
+    tslib "^1.9.3"
+
 "@material/data-table@^5.1.0":
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/@material/data-table/-/data-table-5.1.0.tgz#4c15a0a18f7ee6d8dba77e435d4fbe064fe1f009"
@@ -2025,6 +2045,17 @@
     "@rmwc/formfield" "^6.1.4"
     "@rmwc/ripple" "^6.1.4"
     "@rmwc/toggleable" "^6.1.4"
+    "@rmwc/types" "^6.0.5"
+
+"@rmwc/chip@^6.1.4":
+  version "6.1.4"
+  resolved "https://registry.yarnpkg.com/@rmwc/chip/-/chip-6.1.4.tgz#ee0ee4caa61acf2fc3951bd85e4331397b2235b9"
+  integrity sha512-zLbrSszpbWhd5qbCCLp5sJgPJhP0HN42Tn2tJhZGDBSkGM63v0L4IhZr49Ie/yvGyfkzU/VvZ2OD/tMjOGE5aQ==
+  dependencies:
+    "@material/chips" "^5.1.0"
+    "@rmwc/base" "^6.1.4"
+    "@rmwc/icon" "^6.1.4"
+    "@rmwc/ripple" "^6.1.4"
     "@rmwc/types" "^6.0.5"
 
 "@rmwc/circular-progress@^6.1.4":
