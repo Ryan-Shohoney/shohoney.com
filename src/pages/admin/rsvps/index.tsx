@@ -59,6 +59,7 @@ interface IAggregatedValues {
   }
   shuttleCount: number;
   afterPartyCount: number;
+  eatingAtAfterParty: number;
   welcomePartyTotal: number;
   peopleEatingAtAfterParty: number;
   incomplete: number;
@@ -82,15 +83,21 @@ const RsvpPage: React.FC<RouteComponentProps> = () => {
       let welcomePartyTotal = 0;
       let peopleEatingAtAfterParty = 0;
       let incomplete = 0;
+      let eatingAtAfterParty = 0;
       attendingParties.forEach(({ lodging, dayAfterParty, ap, welcomeParty , guests}) => {
         if(lodging) {
           hotelCounts[lodging.location] = hotelCounts[lodging.location] ? hotelCounts[lodging.location] + 1 : 1;
         }
-        ap && dayAfterParty && dayAfterParty !== 'no' && afterPartyCount++;
         if(welcomeParty && welcomeParty.attending !== 'no') {
           welcomePartyTotal += welcomeParty.numGuests;
           if(welcomeParty.attending === 'yes') {
             peopleEatingAtAfterParty += welcomeParty.numGuests;
+          }
+        }
+        if(ap && dayAfterParty && dayAfterParty !== 'no') {
+          afterPartyCount += guests.length;
+          if(dayAfterParty === 'yes') {
+            eatingAtAfterParty += guests.length;
           }
         }
         if(!lodging || guests.some(g => !g.meal)) {
@@ -116,6 +123,7 @@ const RsvpPage: React.FC<RouteComponentProps> = () => {
         mealCounts,
         hotelCounts,
         afterPartyCount,
+        eatingAtAfterParty,
         welcomePartyTotal,
         peopleEatingAtAfterParty,
         incomplete,
@@ -153,6 +161,7 @@ const RsvpPage: React.FC<RouteComponentProps> = () => {
                 <Chip label={`Eating at welcome party: ${aggregatedValues.peopleEatingAtAfterParty}`} />
                 <Chip label={`Wedding: ${aggregatedValues.totalGuests}`} />
                 <Chip label={`Attending Day After Party: ${aggregatedValues.afterPartyCount}`} />
+                <Chip label={`Eating at Day After Party: ${aggregatedValues.eatingAtAfterParty}`} />
                 <Chip label={`Using Shuttle: ${aggregatedValues.shuttleCount} `} icon={'directions_bus'} />
               </ChipSet>
               <Typography use={'body1'} style={{paddingLeft:'0.5rem'}}>
