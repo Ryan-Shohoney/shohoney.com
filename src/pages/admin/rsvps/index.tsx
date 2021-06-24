@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { Typography } from '@rmwc/typography';
 import '@rmwc/typography/styles';
 import { RouteComponentProps } from "@reach/router";
@@ -9,7 +9,10 @@ import { Grid, GridCell } from '@rmwc/grid';
 import '@rmwc/grid/styles';
 import { ChipSet, Chip } from '@rmwc/chip';
 import '@rmwc/chip/styles';
+import { DataTable, DataTableHeadCell, DataTableContent,DataTableHead, DataTableRow, DataTableBody, DataTableCell } from '@rmwc/data-table';
+import '@rmwc/data-table/styles';
 import { mealValues } from '../../../components/rsvp-form/reception';
+import { get as _get } from 'lodash';
 
 interface IRsvpLodging {
   location: string;
@@ -67,13 +70,31 @@ interface IAggregatedValues {
 
 const RsvpPage: React.FC<RouteComponentProps> = () => {
   const [rsvps, setRsvps] = useState<IRsvp[]>();
+  const [filteredRSVPS, setFilteredRSVPs] = useState<IRsvp[]>();
+  const [filters, setFilters] = useState<Array<{ prettyName: string; path: string; values: any[] }>>([]);
   useEffect(() => {
     const doFetch = async () => {
       const result = await get<IPartiesResponse>('rsvp');
       setRsvps(result.parties);
+      setFilteredRSVPs(result.parties);
     }
     doFetch();
   }, []);
+  useEffect(() => {
+    const filtered = rsvps?.filter(doFilter);
+
+    setFilteredRSVPs(filtered);
+  }, [filters])
+  const applyFilterCallback = (filterObj: { prettyName: string; path: string; values: any[] }) => {
+    const copy = [...filters];
+    const index = copy.findIndex(f => f.path === filterObj.path);
+    if(index >= 0) {
+      copy.splice(index, 1);
+    }
+    const currentFilters = index >= 0 ? copy: [...filters, filterObj];
+
+    setFilters(currentFilters);
+  };
   useEffect(() => {
     if(rsvps) {
       const attendingParties = rsvps.filter(r => r.rsvp === 0);
@@ -131,6 +152,19 @@ const RsvpPage: React.FC<RouteComponentProps> = () => {
     }
   }, [rsvps]);
   const [aggregatedValues, setAggregatedValues] = useState<IAggregatedValues>();
+  const doFilter = (rsvp: IRsvp) => {
+    let satisfies = true;
+    filters.forEach(({ path, values}) => {
+      const valueToCheck = _get(rsvp, path);
+      satisfies = values.some(v => v === valueToCheck);
+    })
+    return satisfies;
+  };
+  const removeFilter = (index: number) => {
+    const copy = [...filters];
+    copy.splice(index);
+    setFilters(copy);
+  };
   return (
     <div>
       <Typography use="headline3">
@@ -157,12 +191,23 @@ const RsvpPage: React.FC<RouteComponentProps> = () => {
                 Events
               </Typography>
               <ChipSet>
-                <Chip label={`Attending welcome party: ${aggregatedValues.welcomePartyTotal}`} />
-                <Chip label={`Eating at welcome party: ${aggregatedValues.peopleEatingAtAfterParty}`} />
+                <Chip
+                  label={`Attending welcome party: ${aggregatedValues.welcomePartyTotal}`}
+                  onClick={() => applyFilterCallback({ prettyName: 'Attending welcome party', path: 'welcomeParty.attending', values: ['yes', 'kindof'] })}
+                  trailingIcon={'filter_alt'} />
+                <Chip label={`Eating at welcome party: ${aggregatedValues.peopleEatingAtAfterParty}`}
+                      onClick={() => applyFilterCallback({ prettyName: 'Eating at welcome party', path: 'welcomeParty.attending', values: ['yes'] })}
+                      trailingIcon={'filter_alt'} />
                 <Chip label={`Wedding: ${aggregatedValues.totalGuests}`} />
-                <Chip label={`Attending Day After Party: ${aggregatedValues.afterPartyCount}`} />
-                <Chip label={`Eating at Day After Party: ${aggregatedValues.eatingAtAfterParty}`} />
-                <Chip label={`Using Shuttle: ${aggregatedValues.shuttleCount} `} icon={'directions_bus'} />
+                <Chip label={`Attending Day After Party: ${aggregatedValues.afterPartyCount}`}
+                      onClick={() => applyFilterCallback({ prettyName: 'Attending Day After Party', path: 'dayAfterParty', values: ['yes', 'dropby'] })}
+                      trailingIcon={'filter_alt'}/>
+                <Chip label={`Eating at Day After Party: ${aggregatedValues.eatingAtAfterParty}`}
+                      onClick={() => applyFilterCallback({ prettyName: 'Eating at Day After Party', path: 'dayAfterParty', values: ['yes'] })}
+                      trailingIcon={'filter_alt'}/>
+                <Chip label={`Using Shuttle: ${aggregatedValues.shuttleCount} `} icon={'directions_bus'}
+                      onClick={() => applyFilterCallback({ prettyName: 'Using Shuttle', path: 'usingShuttle', values: [true] })}
+                      trailingIcon={'filter_alt'}/>
               </ChipSet>
               <Typography use={'body1'} style={{paddingLeft:'0.5rem'}}>
                 Meal Choices
@@ -186,11 +231,47 @@ const RsvpPage: React.FC<RouteComponentProps> = () => {
               <ChipSet>
                 <Chip label={`Incomplete RSVPs: ${aggregatedValues?.incomplete}`} />
               </ChipSet>
+              {filters.length > 0 && (
+                <>
+                <Typography use={'body1'} style={{paddingLeft:'0.5rem'}}>
+                  Applied Filters
+                </Typography>
+                <ChipSet>
+                  {filters.map((f, index) => (
+                    <Chip key={f.path} label={f.prettyName} onClick={() => removeFilter(index)} icon={'cancel'}/>
+                  ))}
+                </ChipSet>
+                </>
+              )}
           </>)}
         </div>
       </div>
+      {filters.length > 0 && filteredRSVPS && (
+        <DataTable>
+          <DataTableContent>
+            <DataTableHead>
+              <DataTableRow>
+                <DataTableHeadCell>
+                  Parties for filters: {filters.map(x => x.prettyName)}
+                </DataTableHeadCell>
+                <DataTableHeadCell>
+                  Guest Count
+                </DataTableHeadCell>
+              </DataTableRow>
+            </DataTableHead>
+            <DataTableBody>
+              {filteredRSVPS.map(f => (
+                <DataTableRow>
+                  <DataTableCell>{f.name}</DataTableCell>
+                  <DataTableCell>{f.guests.length}</DataTableCell>
+                </DataTableRow>
+              ))}
+            </DataTableBody>
+          </DataTableContent>
+        </DataTable>
+      )}
       <Grid>
-        {rsvps && rsvps.length && rsvps?.sort((a,b) => a.rsvp - b.rsvp).map(r => (
+        {filteredRSVPS && filteredRSVPS.length && filteredRSVPS?.sort((a,b) => a.rsvp - b.rsvp).map(r => (
           <GridCell key={r.name} phone={12} tablet={6} desktop={4}>
             <RsvpCard rsvp={r} />
           </GridCell>
