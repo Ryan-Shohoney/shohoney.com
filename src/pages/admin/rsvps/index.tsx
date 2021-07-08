@@ -72,11 +72,16 @@ const RsvpPage: React.FC<RouteComponentProps> = () => {
   const [rsvps, setRsvps] = useState<IRsvp[]>();
   const [filteredRSVPS, setFilteredRSVPs] = useState<IRsvp[]>();
   const [filters, setFilters] = useState<Array<{ prettyName: string; path: string; values: any[] }>>([]);
+  const [guestList, setGuestList] = useState<Array<{firstName: string; lastName: string; partyName: string}>>([]);
+  const [guestListActive, setGuestListActive] = useState<boolean>(false);
   useEffect(() => {
     const doFetch = async () => {
-      const result = await get<IPartiesResponse>('rsvp');
-      setRsvps(result.parties);
-      setFilteredRSVPs(result.parties);
+      const { parties } = await get<IPartiesResponse>('rsvp');
+      setRsvps(parties);
+      setFilteredRSVPs(parties);
+      const allGuests = parties?.filter(r => r.rsvp === 0).map(r => r.guests.map(({ firstName, lastName}) => ({ firstName, lastName, partyName: r.name }))).flat().sort((a, b) => a?.lastName?.localeCompare(b.lastName)) ?? [];
+
+      setGuestList(allGuests);
     }
     doFetch();
   }, []);
@@ -95,6 +100,7 @@ const RsvpPage: React.FC<RouteComponentProps> = () => {
 
     setFilters(currentFilters);
   };
+  const showGuestList = () => setGuestListActive(!guestListActive);
   useEffect(() => {
     if(rsvps) {
       const attendingParties = rsvps.filter(r => r.rsvp === 0);
@@ -182,7 +188,7 @@ const RsvpPage: React.FC<RouteComponentProps> = () => {
                 Party Info:
               </Typography>
               <ChipSet>
-                <Chip label={`Total Guests: ${aggregatedValues?.totalGuests}`} />
+                <Chip label={`Total Guests: ${aggregatedValues?.totalGuests}`} onClick={() => showGuestList()} trailingIcon={guestListActive ? 'cancel' : 'filter_alt'}/>
                 <Chip label={`Total RSVPs: ${rsvps?.length}`} />
                 <Chip label={`Yes: ${aggregatedValues?.totalPartiesYes}`} />
                 <Chip label={`No: ${aggregatedValues?.totalPartiesNo}`} />
@@ -264,6 +270,30 @@ const RsvpPage: React.FC<RouteComponentProps> = () => {
                 <DataTableRow>
                   <DataTableCell>{f.name}</DataTableCell>
                   <DataTableCell>{f.guests.length}</DataTableCell>
+                </DataTableRow>
+              ))}
+            </DataTableBody>
+          </DataTableContent>
+        </DataTable>
+      )}
+      {guestListActive && (
+        <DataTable>
+          <DataTableContent>
+            <DataTableHead>
+              <DataTableRow>
+                <DataTableHeadCell>
+                  First Name
+                </DataTableHeadCell>
+                <DataTableHeadCell>
+                  Last Name
+                </DataTableHeadCell>
+              </DataTableRow>
+            </DataTableHead>
+            <DataTableBody>
+              {guestList.map(f => (
+                <DataTableRow>
+                  <DataTableCell>{f.firstName}</DataTableCell>
+                  <DataTableCell>{f.lastName}</DataTableCell>
                 </DataTableRow>
               ))}
             </DataTableBody>
