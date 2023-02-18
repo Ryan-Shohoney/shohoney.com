@@ -16,50 +16,16 @@ const PAGE_NAME = "home-page";
 export const cheaterMargin = {
   margin: "0.25rem",
 };
-const IndexPage: React.FC<PageProps> = (props) => {
-  const [timeString, setTimeString] = useState(timeUntil(EVENT_DATE));
-
-  useEffect((): any => {
-    const interval = setInterval((_) => {
-      setTimeString(timeUntil(EVENT_DATE));
-    }, 1000);
-    return (_) => clearInterval(interval);
-  }, [timeString]);
-  const heroImages = heroImageService(PAGE_NAME)[0];
-
-  return (
-    <Layout timeString={timeString}>
-      <SEO title="Home" />
-      <HeroSlider srcs={heroImages.images} />
-      <Grid>
-        <GridCell span={12}>
-          <Typography use="headline4">Thanks for stopping by!</Typography>
-          <br />
-          <Typography use="body1" tag="p">
-            We are carefully planning a weekend of outdoor wedding celebrations
-            in the Madison area. Mark your calendar, and we hope to celebrate
-            with you in July!
-          </Typography>
-          <ButtonLink
-            style={cheaterMargin}
-            buttonHref="/faq"
-            buttonText="Read Our FAQ"
-            outline
-            raised
-          />
-          <ButtonLink
-            style={cheaterMargin}
-            buttonHref="/schedule-of-events"
-            buttonText="Schedule of Events"
-            outline
-            raised
-            switchToSecondary
-            switchToSecondaryBg
-          />
-        </GridCell>
-      </Grid>
-    </Layout>
-  );
-};
+const IndexPage: React.FC<PageProps> = (props) => (
+  <Layout>
+    <SEO title="Home" />
+    <Grid>
+      <GridCell span={12} >
+        <h1 >¯\_(ツ)_/¯</h1>
+        <h3>More to come.... at some point in time.</h3>
+      </GridCell>
+    </Grid>
+  </Layout>
+);
 
 export default IndexPage;
