@@ -1,12 +1,21 @@
+/**
+ * Configure your Gatsby site with this file.
+ *
+ * See: https://www.gatsbyjs.com/docs/reference/config-files/gatsby-config/
+ */
+
+/**
+ * @type {import('gatsby').GatsbyConfig}
+ */
 module.exports = {
   siteMetadata: {
-    title: `Ryan & Amanda`,
-    description: `Ryan and Amanda's Wedding website, welcome!`,
-    author: `Ryan Shohoney`,
-    siteUrl: 'https://shohoney.com'
+    title: `Shohoney.com`,
+    description: `The Shohoney's Personal Website`,
+    author: `Ryan-Shohoney`,
+    siteUrl: `https://shohoney.com`,
   },
   plugins: [
-    `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-image`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -23,29 +32,15 @@ module.exports = {
         short_name: `starter`,
         start_url: `/`,
         background_color: `#663399`,
-        theme_color: `#663399`,
+        // This will impact how browsers show your PWA/website
+        // https://css-tricks.com/meta-theme-color-and-trickery/
+        // theme_color: `#663399`,
         display: `minimal-ui`,
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
       },
     },
     {
-      resolve: `gatsby-source-cosmicjs`,
-      options: {
-        bucketSlug: 'shohoneycom',
-        objectTypes: ['landing-pages', 'content-pages', 'faqs'],
-        apiAccess: {
-          read_key: '6v9fpSVeZnK8hEy21d5H2VtpOj0wxo5dOyBeJdp7IzIbsW9Wed'
-        },
-        localMedia: true,
-      }
-    },
-    {
-      resolve: 'gatsby-plugin-google-analytics',
-      options: {
-        trackingId: 'UA-28702363-1',
-        head: false,
-        respectDNT: true,
-      }
+      resolve: `gatsby-plugin-react-helmet`,
     }
   ],
 }
