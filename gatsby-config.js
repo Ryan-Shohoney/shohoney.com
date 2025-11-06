@@ -15,6 +15,7 @@ module.exports = {
     siteUrl: `https://shohoney.com`,
   },
   plugins: [
+    `gatsby-plugin-netlify`,
     `gatsby-plugin-image`,
     {
       resolve: `gatsby-source-filesystem`,
